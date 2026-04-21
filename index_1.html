@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>InspireSpaceMedia – 空から、心を動かす。</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Raleway:wght@200;300;400;600&family=Noto+Sans+JP:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,300;1,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #080808;
+      --white: #f5f0eb;
+      --gold: #c8a96e;
+      --gold-dim: rgba(200,169,110,0.15);
+      --gray: #1a1a1a;
+      --gray-text: #888;
+      --accent: #e8d5a3;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* Custom cursor */
+    .cursor {
+      position: fixed;
+      width: 10px; height: 10px;
+      background: var(--gold);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: width 0.2s, height 0.2s, background 0.2s;
+    }
+    .cursor-ring {
+      position: fixed;
+      width: 36px; height: 36px;
+      border: 1px solid rgba(200,169,110,0.5);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: all 0.12s ease;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 48px;
+      background: linear-gradient(to bottom, rgba(8,8,8,0.9), transparent);
+      transition: background 0.4s;
+    }
+    nav.scrolled { background: rgba(8,8,8,0.97); }
+
+    .logo {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300;
+      font-size: 20px;
+      letter-spacing: 0.3em;
+      color: var(--white);
+      text-decoration: none;
+    }
+    .logo span { color: var(--white); }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: rgba(245,240,235,0.65);
+      text-decoration: none;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    .nav-contact {
+      border: 1px solid var(--gold);
+      padding: 8px 24px;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-decoration: none;
+      transition: background 0.3s, color 0.3s;
+    }
+    .nav-contact:hover { background: var(--gold); color: var(--black); }
+
+    /* ── HERO ── */
+    #hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+      padding: 80px 80px;
+    }
+
+    .hero-video-wrap {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    .hero-video-wrap iframe {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 177.78vh; /* 16:9 */
+      height: 56.25vw;
+      min-width: 100%; min-height: 100%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      border: none;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(8,8,8,0.9) 0%,
+        rgba(8,8,8,0.3) 40%,
+        rgba(8,8,8,0.15) 70%,
+        transparent 100%
+      );
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+    }
+    .hero-eyebrow {
+      font-size: 10px;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fadeUp 1s 0.4s ease forwards;
+    }
+    .hero-title {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 200;
+      font-size: clamp(52px, 8vw, 105px);
+      line-height: 0.95;
+      letter-spacing: 0.12em;
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeUp 1s 0.7s ease forwards;
+    }
+    .hero-title em {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      color: var(--white);
+      display: block;
+      font-size: 0.65em;
+      letter-spacing: 0.06em;
+    }
+    .hero-sub {
+      font-size: 14px;
+      line-height: 2;
+      color: rgba(245,240,235,0.7);
+      max-width: 460px;
+      margin-bottom: 40px;
+      opacity: 0;
+      animation: fadeUp 1s 1s ease forwards;
+    }
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--white);
+      text-decoration: none;
+      opacity: 0;
+      animation: fadeUp 1s 1.2s ease forwards;
+    }
+    .hero-cta::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 1px;
+      background: var(--gold);
+      transition: width 0.3s;
+    }
+    .hero-cta:hover::after { width: 100px; }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 48px; right: 80px;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      opacity: 0;
+      animation: fadeIn 1.5s 1.8s ease forwards;
+    }
+    .hero-scroll span {
+      font-size: 9px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gray-text);
+      writing-mode: vertical-rl;
+    }
+    .scroll-line {
+      width: 1px;
+      height: 60px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: scrollLine 2s 2s infinite ease;
+    }
+
+    @keyframes scrollLine {
+      0% { transform: scaleY(0); transform-origin: top; opacity: 1; }
+      50% { transform: scaleY(1); transform-origin: top; opacity: 1; }
+      100% { transform: scaleY(0); transform-origin: bottom; opacity: 0; }
+    }
+
+    /* ── NEWS TICKER ── */
+    .ticker {
+      background: var(--gold-dim);
+      border-top: 1px solid rgba(200,169,110,0.2);
+      border-bottom: 1px solid rgba(200,169,110,0.2);
+      padding: 14px 0;
+      overflow: hidden;
+    }
+    .ticker-inner {
+      display: flex;
+      gap: 80px;
+      animation: ticker 30s linear infinite;
+      white-space: nowrap;
+    }
+    .ticker-item {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+    }
+    .ticker-date {
+      color: var(--gold);
+      font-size: 10px;
+    }
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: 120px 80px; }
+
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      font-size: 10px;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(42px, 6vw, 80px);
+      letter-spacing: 0.06em;
+      line-height: 1;
+      margin-bottom: 60px;
+    }
+    .section-title em {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      color: var(--white);
+      font-size: 0.7em;
+      display: block;
+    }
+
+    /* ── ABOUT ── */
+    #about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .about-text p {
+      font-size: 15px;
+      line-height: 2.2;
+      color: rgba(245,240,235,0.75);
+      margin-bottom: 20px;
+    }
+    .about-video {
+      position: relative;
+      aspect-ratio: 16/9;
+      overflow: hidden;
+    }
+    .about-video iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    .about-video::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border: 1px solid rgba(200,169,110,0.3);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* ── WORKS ── */
+    #works { background: #0c0c0c; }
+
+    .works-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-bottom: 60px;
+    }
+
+    .work-item {
+      position: relative;
+      aspect-ratio: 16/9;
+      overflow: hidden;
+      background: #111;
+      cursor: none;
+    }
+    .work-item iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      transition: transform 0.6s ease;
+    }
+    .work-item:hover iframe { transform: scale(1.04); }
+    .work-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(8,8,8,0.85), transparent 50%);
+      opacity: 0;
+      transition: opacity 0.4s;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .work-item:hover .work-overlay { opacity: 1; }
+    .work-label {
+      position: absolute;
+      bottom: 20px; left: 20px;
+      z-index: 3;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: all 0.4s;
+      pointer-events: none;
+    }
+    .work-item:hover .work-label { opacity: 1; transform: translateY(0); }
+    .work-label h4 { font-size: 13px; letter-spacing: 0.08em; margin-bottom: 4px; }
+    .work-label span { font-size: 10px; color: var(--gold); letter-spacing: 0.15em; }
+
+    /* ── SERVICES ── */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+
+    .service-card {
+      background: var(--gray);
+      padding: 48px 36px;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.3s, background 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 2px;
+      background: var(--gold);
+      transition: width 0.5s ease;
+    }
+    .service-card:hover::before { width: 100%; }
+    .service-card:hover { background: #1f1e1b; }
+
+    .service-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 72px;
+      color: rgba(200,169,110,0.08);
+      line-height: 1;
+      margin-bottom: -20px;
+    }
+    .service-icon {
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+    .service-card h3 {
+      font-size: 17px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      margin-bottom: 14px;
+    }
+    .service-card p {
+      font-size: 13px;
+      line-height: 2;
+      color: rgba(245,240,235,0.55);
+    }
+
+    /* ── VIDEO ARCHIVE ── */
+    #archive { background: #0a0a0a; }
+
+    .archive-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 2px;
+    }
+    .archive-item {
+      position: relative;
+      overflow: hidden;
+      background: #111;
+    }
+    .archive-item:first-child {
+      grid-row: 1 / 3;
+    }
+    .archive-item iframe {
+      width: 100%;
+      height: 100%;
+      min-height: 200px;
+      border: none;
+      display: block;
+      transition: transform 0.6s;
+    }
+    .archive-item:hover iframe { transform: scale(1.03); }
+    .archive-item:first-child { aspect-ratio: unset; }
+    .archive-item:first-child iframe { min-height: 400px; }
+
+    /* ── NEWS ── */
+    #news { }
+
+    .news-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .news-item {
+      display: grid;
+      grid-template-columns: 160px 100px 1fr;
+      align-items: center;
+      gap: 32px;
+      padding: 24px 0;
+      border-bottom: 1px solid rgba(245,240,235,0.08);
+      text-decoration: none;
+      color: var(--white);
+      transition: padding-left 0.3s;
+    }
+    .news-item:hover { padding-left: 12px; }
+    .news-item:hover .news-arrow { opacity: 1; transform: translateX(0); }
+    .news-date { font-size: 12px; color: var(--gray-text); letter-spacing: 0.08em; }
+    .news-tag {
+      font-size: 9px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid rgba(200,169,110,0.4);
+      padding: 3px 10px;
+      text-align: center;
+    }
+    .news-title {
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.6;
+      color: rgba(245,240,235,0.8);
+    }
+    .news-arrow {
+      opacity: 0;
+      transform: translateX(-8px);
+      transition: all 0.3s;
+      color: var(--gold);
+      font-size: 18px;
+      margin-left: auto;
+    }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--gray);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    #contact::before {
+      content: 'CONTACT';
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(80px, 15vw, 220px);
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      color: rgba(200,169,110,0.04);
+      letter-spacing: 0.1em;
+      white-space: nowrap;
+      pointer-events: none;
+    }
+    .contact-inner { position: relative; z-index: 1; }
+    #contact p {
+      font-size: 15px;
+      line-height: 2.2;
+      color: rgba(245,240,235,0.6);
+      max-width: 520px;
+      margin: 0 auto 48px;
+    }
+    .contact-btn {
+      display: inline-block;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      text-decoration: none;
+      padding: 18px 64px;
+      font-size: 11px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      transition: background 0.3s, color 0.3s;
+    }
+    .contact-btn:hover { background: var(--gold); color: var(--black); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #050505;
+      padding: 60px 80px 40px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 40px;
+      align-items: start;
+      border-top: 1px solid rgba(200,169,110,0.1);
+    }
+    .footer-logo {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300;
+      font-size: 18px;
+      letter-spacing: 0.3em;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+    .footer-logo span { color: var(--white); }
+    footer p { font-size: 12px; color: var(--gray-text); line-height: 2; }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      list-style: none;
+      text-align: right;
+    }
+    .footer-links a {
+      font-size: 11px;
+      color: var(--gray-text);
+      text-decoration: none;
+      letter-spacing: 0.12em;
+      transition: color 0.3s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.05);
+      margin-top: 40px;
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-bottom p { font-size: 10px; color: rgba(136,136,136,0.5); letter-spacing: 0.08em; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      nav { padding: 20px 32px; }
+      .nav-links { display: none; }
+      section { padding: 80px 32px; }
+      #about { grid-template-columns: 1fr; }
+      .works-grid { grid-template-columns: 1fr 1fr; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      footer { grid-template-columns: 1fr; padding: 48px 32px 32px; }
+      .footer-links { text-align: left; }
+      #hero { padding: 60px 32px; }
+      .hero-scroll { display: none; }
+      .archive-grid { grid-template-columns: 1fr 1fr; }
+      .archive-item:first-child { grid-column: 1 / 3; grid-row: auto; }
+    }
+    @media (max-width: 640px) {
+      .works-grid { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: 1fr; }
+      .news-item { grid-template-columns: 1fr; gap: 8px; }
+      .news-arrow { display: none; }
+      .archive-grid { grid-template-columns: 1fr; }
+      .archive-item:first-child { grid-column: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Cursor -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- NAV -->
+  <nav id="mainNav">
+    <a href="#" class="logo">Inspire<span>Space</span>Media</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#works">Works</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#archive">Archive</a></li>
+      <li><a href="#news">News</a></li>
+    </ul>
+    <a href="#contact" class="nav-contact">Contact</a>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-video-wrap">
+      <!-- Replace VIDEO_ID with your YouTube video ID -->
+      <iframe
+        src="https://www.youtube.com/embed/live_stream?channel=UCsample&autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=dQw4w9WgXcQ"
+        allow="autoplay; encrypted-media"
+        allowfullscreen
+        title="Hero video"
+      ></iframe>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">FPV Drone Cinematography</p>
+      <h1 class="hero-title">
+        InspireSpaceMedia<br>
+        <em>空から、心を動かす。</em>
+      </h1>
+      <p class="hero-sub">
+        ドローン撮影・動画制作・施設点検・農薬散布まで、<br>
+        空から切り取る唯一無二の映像で、<br>
+        あなたのプロジェクトを次のステージへ。
+      </p>
+      <a href="#works" class="hero-cta">View Our Works</a>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- NEWS TICKER -->
+  <div class="ticker">
+    <div class="ticker-inner">
+      <div class="ticker-item"><span class="ticker-date">New</span><span>業務開局済み・全国包括申請済み ｜ ドローン撮影・点検・農薬散布 全国対応</span></div>
+      <div class="ticker-item"><span class="ticker-date">Service</span><span>FPVドローン・マイクロドローン・通常ドローン撮影 承ります</span></div>
+      <div class="ticker-item"><span class="ticker-date">YouTube</span><span>ドローン撮影・空撮映像をYouTubeで配信中</span></div>
+      <div class="ticker-item"><span class="ticker-date">Contact</span><span>お仕事のご依頼・ご質問は dreamgate.omori@gmail.com まで</span></div>
+      <!-- duplicate for seamless loop -->
+      <div class="ticker-item"><span class="ticker-date">New</span><span>業務開局済み・全国包括申請済み ｜ ドローン撮影・点検・農薬散布 全国対応</span></div>
+      <div class="ticker-item"><span class="ticker-date">Service</span><span>FPVドローン・マイクロドローン・通常ドローン撮影 承ります</span></div>
+      <div class="ticker-item"><span class="ticker-date">YouTube</span><span>ドローン撮影・空撮映像をYouTubeで配信中</span></div>
+      <div class="ticker-item"><span class="ticker-date">Contact</span><span>お仕事のご依頼・ご質問は dreamgate.omori@gmail.com まで</span></div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about-text reveal">
+      <div class="section-label">About Us</div>
+      <h2 class="section-title">DRONE<br><em>Cinema</em></h2>
+      <p>空から心を動かす映像をお届けする映像制作チーム。ドローン撮影から動画企画・編集・配信まで、映像に関わるすべてをワンストップで対応します。</p>
+      <p>FPVドローン・マイクロドローン・通常ドローンを駆使した撮影から、YouTube動画配信・映像企画制作編集まで一貫対応。業務開局済み・全国包括申請済みの安心対応です。</p>
+    </div>
+    <div class="about-video reveal">
+      <!-- Replace VIDEO_ID with your YouTube embed ID -->
+      <iframe
+        src="https://www.youtube.com/embed/dQw4w9WgXcQ?controls=0&rel=0&modestbranding=1"
+        allow="autoplay; encrypted-media"
+        allowfullscreen
+        title="About video"
+      ></iframe>
+    </div>
+  </section>
+
+  <!-- WORKS -->
+  <section id="works">
+    <div class="reveal">
+      <div class="section-label">Works</div>
+      <h2 class="section-title">OUR<br><em>Portfolio</em></h2>
+    </div>
+
+    <div class="works-grid reveal">
+      <div class="work-item">
+        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?controls=0&rel=0&modestbranding=1" allowfullscreen title="Work 1"></iframe>
+        <div class="work-overlay"></div>
+        <div class="work-label">
+          <h4>桜ドローンプロジェクト 2025</h4>
+          <span>FPV Micro Drone</span>
+        </div>
+      </div>
+      <div class="work-item">
+        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?controls=0&rel=0&modestbranding=1" allowfullscreen title="Work 2"></iframe>
+        <div class="work-overlay"></div>
+        <div class="work-label">
+          <h4>大阪・関西万博 空撮</h4>
+          <span>8K Aerial</span>
+        </div>
+      </div>
+      <div class="work-item">
+        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?controls=0&rel=0&modestbranding=1" allowfullscreen title="Work 3"></iframe>
+        <div class="work-overlay"></div>
+        <div class="work-label">
+          <h4>タンザニア 野生動物 8K撮影</h4>
+          <span>Wildlife Documentary</span>
+        </div>
+      </div>
+      <div class="work-item">
+        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?controls=0&rel=0&modestbranding=1" allowfullscreen title="Work 4"></iframe>
+        <div class="work-overlay"></div>
+        <div class="work-label">
+          <h4>CM / PV 空撮</h4>
+          <span>Commercial</span>
+        </div>
+      </div>
+      <div class="work-item">
+        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?controls=0&rel=0&modestbranding=1" allowfullscreen title="Work 5"></iframe>
+        <div class="work-overlay"></div>
+        <div class="work-label">
+          <h4>音楽 MV 撮影</h4>
+          <span>Music Video</span>
+        </div>
+      </div>
+      <div class="work-item">
+        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?controls=0&rel=0&modestbranding=1" allowfullscreen title="Work 6"></iframe>
+        <div class="work-overlay"></div>
+        <div class="work-label">
+          <h4>イベント空撮</h4>
+          <span>Event</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="reveal">
+      <div class="section-label">Services</div>
+      <h2 class="section-title">WHAT WE<br><em>Offer</em></h2>
+    </div>
+    <div class="services-grid reveal">
+      <div class="service-card">
+        <div class="service-number">01</div>
+        <div class="service-icon">🚁</div>
+        <h3>ドローン撮影</h3>
+        <p>FPVドローン・マイクロドローン・通常ドローンによる空撮映像制作。業務開局済み・全国包括申請済みで全国対応可能です。</p>
+      </div>
+      <div class="service-card">
+        <div class="service-number">02</div>
+        <div class="service-icon">🎬</div>
+        <h3>動画企画・制作・編集</h3>
+        <p>企画立案から撮影・編集・納品まで一貫対応。イベント、CM、プロモーション映像など幅広い映像制作に対応します。</p>
+      </div>
+      <div class="service-card">
+        <div class="service-number">03</div>
+        <div class="service-icon">🏗️</div>
+        <h3>ドローン点検</h3>
+        <p>外壁・屋根・施設などのドローン点検業務。足場不要で安全・低コスト・短時間での点検を実現します。</p>
+      </div>
+      <div class="service-card">
+        <div class="service-number">04</div>
+        <div class="service-icon">🌾</div>
+        <h3>ドローン農薬散布</h3>
+        <p>農業用ドローンによる農薬散布オペレーター業務。広い農地を効率的・安全に対応します。</p>
+      </div>
+      <div class="service-card">
+        <div class="service-number">05</div>
+        <div class="service-icon">▶️</div>
+        <h3>YouTube 動画配信・制作</h3>
+        <p>YouTube チャンネルの映像企画・撮影・編集・運用サポート。ドローン映像・空撮・映像制作など幅広く対応します。</p>
+      </div>
+      <div class="service-card">
+        <div class="service-number">06</div>
+        <div class="service-icon">📋</div>
+        <h3>JMAドローンインストラクター</h3>
+        <p>JMA認定のドローンインストラクターによる操縦指導・講習。初心者から業務利用者まで丁寧に対応します。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARCHIVE -->
+  <section id="archive">
+    <div class="reveal">
+      <div class="section-label">Video Archive</div>
+      <h2 class="section-title">ARCHIVE<br><em>Collection</em></h2>
+    </div>
+    <div class="archive-grid reveal">
+      <div class="archive-item">
+        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?controls=1&rel=0" allowfullscreen title="Archive 1"></iframe>
+      </div>
+      <div class="archive-item">
+        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?controls=1&rel=0" allowfullscreen title="Archive 2"></iframe>
+      </div>
+      <div class="archive-item">
+        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?controls=1&rel=0" allowfullscreen title="Archive 3"></iframe>
+      </div>
+      <div class="archive-item">
+        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?controls=1&rel=0" allowfullscreen title="Archive 4"></iframe>
+      </div>
+      <div class="archive-item">
+        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?controls=1&rel=0" allowfullscreen title="Archive 5"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWS -->
+  <section id="news">
+    <div class="reveal">
+      <div class="section-label">News</div>
+      <h2 class="section-title">WHAT'S<br><em>New</em></h2>
+    </div>
+    <div class="news-list reveal">
+      <a href="#" class="news-item">
+        <span class="news-date">2026.04.22</span>
+        <span class="news-tag">New</span>
+        <span class="news-title">nspireSpaceMedia 新ホームページを公開しました</span>
+        <span class="news-arrow">→</span>
+      </a>
+      <a href="#" class="news-item">
+        <span class="news-date">2026.01.01</span>
+        <span class="news-tag">Info</span>
+        <span class="news-title">業務開局済み・全国包括申請済み。全国どこでもドローン撮影対応します</span>
+        <span class="news-arrow">→</span>
+      </a>
+      <a href="#" class="news-item">
+        <span class="news-date">2025.10.01</span>
+        <span class="news-tag">Service</span>
+        <span class="news-title">ドローン農薬散布オペレーターサービスを開始しました</span>
+        <span class="news-arrow">→</span>
+      </a>
+      <a href="#" class="news-item">
+        <span class="news-date">2025.06.01</span>
+        <span class="news-tag">YouTube</span>
+        <span class="news-title">ドローン空撮映像をYouTubeで配信中。チャンネル登録お待ちしております</span>
+        <span class="news-arrow">→</span>
+      </a>
+      <a href="#" class="news-item">
+        <span class="news-date">2025.04.01</span>
+        <span class="news-tag">Works</span>
+        <span class="news-title">外壁・屋根・施設のドローン点検サービス 受付中</span>
+        <span class="news-arrow">→</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-inner reveal">
+      <div class="section-label" style="justify-content:center;">Contact Us</div>
+      <h2 class="section-title" style="margin-bottom:20px;">LET'S<br><em>Work Together</em></h2>
+      <p>ドローン撮影・動画制作・点検業務など、お仕事のご依頼・ご質問はお気軽にご連絡ください。</p>
+      <a href="mailto:dreamgate.omori@gmail.com" class="contact-btn">お問い合わせ / Contact</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div>
+      <div class="footer-logo">Inspire<span>Space</span>Media</div>
+      <p>合同会社 Drem Gate<br>
+         〒370-1301 群馬県高崎市新町3023 小菅アーバン101<br>
+         代表社員　大森 利勝<br>
+         dreamgate.omori@gmail.com</p>
+    </div>
+    <ul class="footer-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#works">Works</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#archive">Archive</a></li>
+      <li><a href="#news">News</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="footer-bottom" style="grid-column:1/-1;">
+      <p>© 2026 合同会社 Drem Gate / InspireSpaceMedia. All rights reserved.</p>
+      <p style="color:rgba(136,136,136,0.3);">Designed with Claude</p>
+    </div>
+  </footer>
+
+  <script>
+    // ── Cursor ──
+    const cursor = document.getElementById('cursor');
+    const ring   = document.getElementById('cursorRing');
+    let rx = 0, ry = 0;
+
+    document.addEventListener('mousemove', e => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top  = e.clientY + 'px';
+      rx += (e.clientX - rx) * 0.12;
+      ry += (e.clientY - ry) * 0.12;
+      ring.style.left = rx + 'px';
+      ring.style.top  = ry + 'px';
+    });
+
+    document.querySelectorAll('a, button').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        cursor.style.width = '20px';
+        cursor.style.height = '20px';
+        ring.style.width = '56px';
+        ring.style.height = '56px';
+      });
+      el.addEventListener('mouseleave', () => {
+        cursor.style.width = '10px';
+        cursor.style.height = '10px';
+        ring.style.width = '36px';
+        ring.style.height = '36px';
+      });
+    });
+
+    // ── Nav scroll ──
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // ── Reveal on scroll ──
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    revealEls.forEach(el => observer.observe(el));
+
+    // ── Smooth cursor ring update ──
+    function updateRing() {
+      rx += (parseFloat(cursor.style.left || 0) - rx) * 0.12;
+      ry += (parseFloat(cursor.style.top || 0) - ry) * 0.12;
+      ring.style.left = rx + 'px';
+      ring.style.top  = ry + 'px';
+      requestAnimationFrame(updateRing);
+    }
+    updateRing();
+  </script>
+</body>
+</html>
