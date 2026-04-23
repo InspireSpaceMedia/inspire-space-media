@@ -13,8 +13,9 @@
     :root {
       --black: #111111;
       --white: #f8f7f4;
-      --gold: #111111;
-      --gold-dim: rgba(0,0,0,0.05);
+      --pure-white: #ffffff;
+      --gold: #c8a96e; /* ロゴやアクセント用にゴールドを定義 */
+      --gold-dim: rgba(200,169,110,0.1);
       --gray: #eeece9;
       --gray-text: #999;
       --accent: #333;
@@ -62,20 +63,24 @@
       align-items: center;
       justify-content: space-between;
       padding: 24px 48px;
-      background: linear-gradient(to bottom, rgba(248,247,244,0.95), transparent);
-      transition: background 0.4s;
+      background: transparent; /* 初期は透明 */
+      transition: background 0.4s, padding 0.4s;
     }
-    nav.scrolled { background: rgba(248,247,244,0.98); border-bottom: 1px solid rgba(0,0,0,0.08); }
+    nav.scrolled { 
+      background: rgba(17,17,17,0.95); 
+      border-bottom: 1px solid rgba(255,255,255,0.1); 
+      padding: 16px 48px;
+    }
 
     .logo {
       font-family: 'Raleway', sans-serif;
       font-weight: 300;
       font-size: 20px;
       letter-spacing: 0.3em;
-      color: var(--black);
+      color: var(--pure-white); /* 白文字に変更 */
       text-decoration: none;
     }
-    .logo span { color: var(--black); }
+    .logo span { color: var(--gold); }
 
     .nav-links {
       display: flex;
@@ -83,26 +88,26 @@
       list-style: none;
     }
     .nav-links a {
-      color: rgba(17,17,17,0.5);
+      color: rgba(255,255,255,0.7); /* 白透過に変更 */
       text-decoration: none;
       font-size: 11px;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       transition: color 0.3s;
     }
-    .nav-links a:hover { color: var(--black); }
+    .nav-links a:hover { color: var(--pure-white); }
 
     .nav-contact {
-      border: 1px solid var(--black);
+      border: 1px solid var(--pure-white);
       padding: 8px 24px;
       font-size: 10px;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--black);
+      color: var(--pure-white);
       text-decoration: none;
       transition: background 0.3s, color 0.3s;
     }
-    .nav-contact:hover { background: var(--black); color: var(--white); }
+    .nav-contact:hover { background: var(--pure-white); color: var(--black); }
 
     /* ── HERO ── */
     #hero {
@@ -113,6 +118,7 @@
       display: flex;
       align-items: flex-end;
       padding: 80px 80px;
+      color: var(--pure-white); /* ヒーロー内テキストを白に */
     }
 
     .hero-video-wrap {
@@ -135,10 +141,9 @@
       inset: 0;
       background: linear-gradient(
         to top,
-        rgba(8,8,8,0.9) 0%,
-        rgba(8,8,8,0.3) 40%,
-        rgba(8,8,8,0.15) 70%,
-        transparent 100%
+        rgba(0,0,0,0.8) 0%,
+        rgba(0,0,0,0.2) 50%,
+        rgba(0,0,0,0.4) 100%
       );
       z-index: 1;
     }
@@ -166,11 +171,12 @@
       margin-bottom: 16px;
       opacity: 0;
       animation: fadeUp 1s 0.7s ease forwards;
+      color: var(--pure-white);
     }
     .hero-title em {
       font-family: 'Cormorant Garamond', serif;
       font-style: italic;
-      color: rgba(255,255,255,0.9);
+      color: rgba(255,255,255,0.8);
       display: block;
       font-size: clamp(28px, 4vw, 56px);
       letter-spacing: 0.06em;
@@ -179,7 +185,7 @@
     .hero-sub {
       font-size: 14px;
       line-height: 2;
-      color: rgba(245,240,235,0.7);
+      color: rgba(255,255,255,0.8);
       max-width: 460px;
       margin-bottom: 40px;
       opacity: 0;
@@ -192,7 +198,7 @@
       font-size: 11px;
       letter-spacing: 0.25em;
       text-transform: uppercase;
-      color: var(--white);
+      color: var(--pure-white);
       text-decoration: none;
       opacity: 0;
       animation: fadeUp 1s 1.2s ease forwards;
@@ -222,7 +228,7 @@
       font-size: 9px;
       letter-spacing: 0.35em;
       text-transform: uppercase;
-      color: var(--gray-text);
+      color: rgba(255,255,255,0.5);
       writing-mode: vertical-rl;
     }
     .scroll-line {
@@ -240,9 +246,7 @@
 
     /* ── NEWS TICKER ── */
     .ticker {
-      background: #111;
-      border-top: none;
-      border-bottom: none;
+      background: #000;
       padding: 14px 0;
       overflow: hidden;
     }
@@ -261,7 +265,7 @@
       letter-spacing: 0.1em;
     }
     .ticker-date {
-      color: rgba(255,255,255,0.3);
+      color: var(--gold);
       font-size: 10px;
     }
     @keyframes ticker {
@@ -330,25 +334,15 @@
       height: 100%;
       border: none;
     }
-    .about-video::before {
-      content: '';
-      position: absolute;
-      inset: -1px;
-      border: 1px solid rgba(0,0,0,0.1);
-      z-index: 1;
-      pointer-events: none;
-    }
 
     /* ── WORKS ── */
     #works { background: #eeece9; }
-
     .works-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 2px;
       margin-bottom: 60px;
     }
-
     .work-item {
       position: relative;
       aspect-ratio: 16/9;
@@ -366,7 +360,7 @@
     .work-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(8,8,8,0.85), transparent 50%);
+      background: linear-gradient(to top, rgba(0,0,0,0.85), transparent 50%);
       opacity: 0;
       transition: opacity 0.4s;
       z-index: 2;
@@ -381,6 +375,7 @@
       transform: translateY(8px);
       transition: all 0.4s;
       pointer-events: none;
+      color: #fff;
     }
     .work-item:hover .work-label { opacity: 1; transform: translateY(0); }
     .work-label h4 { font-size: 13px; letter-spacing: 0.08em; margin-bottom: 4px; }
@@ -392,7 +387,6 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 2px;
     }
-
     .service-card {
       background: #fff;
       padding: 48px 36px;
@@ -420,63 +414,25 @@
       line-height: 1;
       margin-bottom: -20px;
     }
-    .service-icon {
-      font-size: 32px;
-      margin-bottom: 20px;
-    }
-    .service-card h3 {
-      font-size: 17px;
-      font-weight: 500;
-      letter-spacing: 0.05em;
-      margin-bottom: 14px;
-      color: var(--black);
-    }
-    .service-card p {
-      font-size: 13px;
-      line-height: 2;
-      color: rgba(17,17,17,0.5);
-    }
+    .service-icon { font-size: 32px; margin-bottom: 20px; }
+    .service-card h3 { font-size: 17px; font-weight: 500; margin-bottom: 14px; }
+    .service-card p { font-size: 13px; line-height: 2; color: rgba(17,17,17,0.5); }
 
-    /* ── VIDEO ARCHIVE ── */
+    /* ── ARCHIVE ── */
     #archive { background: #eeece9; }
-
     .archive-grid {
       display: grid;
       grid-template-columns: 2fr 1fr 1fr;
-      grid-template-rows: auto auto;
       gap: 2px;
     }
-    .archive-item {
-      position: relative;
-      overflow: hidden;
-      background: #ddd;
-    }
-    .archive-item:first-child {
-      grid-row: 1 / 3;
-    }
-    .archive-item iframe {
-      width: 100%;
-      height: 100%;
-      min-height: 200px;
-      border: none;
-      display: block;
-      transition: transform 0.6s;
-    }
-    .archive-item:hover iframe { transform: scale(1.03); }
-    .archive-item:first-child { aspect-ratio: unset; }
-    .archive-item:first-child iframe { min-height: 400px; }
+    .archive-item { position: relative; overflow: hidden; background: #ddd; }
+    .archive-item:first-child { grid-row: 1 / 3; }
+    .archive-item iframe { width: 100%; height: 100%; border: none; min-height: 200px; display: block; }
 
     /* ── NEWS ── */
-    #news { }
-
-    .news-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
     .news-item {
       display: grid;
-      grid-template-columns: 160px 100px 1fr;
+      grid-template-columns: 160px 100px 1fr 40px;
       align-items: center;
       gap: 32px;
       padding: 24px 0;
@@ -486,31 +442,8 @@
       transition: padding-left 0.3s;
     }
     .news-item:hover { padding-left: 12px; }
-    .news-item:hover .news-arrow { opacity: 1; transform: translateX(0); }
-    .news-date { font-size: 12px; color: #aaa; letter-spacing: 0.08em; }
-    .news-tag {
-      font-size: 9px;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: #555;
-      border: 1px solid rgba(0,0,0,0.2);
-      padding: 3px 10px;
-      text-align: center;
-    }
-    .news-title {
-      font-size: 14px;
-      font-weight: 400;
-      line-height: 1.6;
-      color: rgba(17,17,17,0.7);
-    }
-    .news-arrow {
-      opacity: 0;
-      transform: translateX(-8px);
-      transition: all 0.3s;
-      color: var(--black);
-      font-size: 18px;
-      margin-left: auto;
-    }
+    .news-date { font-size: 12px; color: #aaa; }
+    .news-tag { font-size: 9px; border: 1px solid rgba(0,0,0,0.2); padding: 3px 10px; text-align: center; }
 
     /* ── CONTACT ── */
     #contact {
@@ -528,21 +461,12 @@
       top: 50%; left: 50%;
       transform: translate(-50%, -50%);
       color: rgba(255,255,255,0.03);
-      letter-spacing: 0.1em;
       white-space: nowrap;
       pointer-events: none;
     }
     .contact-inner { position: relative; z-index: 1; }
-    #contact p {
-      font-size: 15px;
-      line-height: 2.2;
-      color: rgba(255,255,255,0.5);
-      max-width: 520px;
-      margin: 0 auto 48px;
-    }
-    #contact .section-label { color: rgba(255,255,255,0.3); }
+    #contact p { color: rgba(255,255,255,0.5); max-width: 520px; margin: 0 auto 48px; }
     #contact .section-title { color: #fff; }
-    #contact .section-title em { color: rgba(255,255,255,0.5); }
     .contact-btn {
       display: inline-block;
       border: 1px solid rgba(255,255,255,0.4);
@@ -558,42 +482,38 @@
 
     /* ── FOOTER ── */
     footer {
-      background: #111;
-      padding: 60px 80px 40px;
+      background: #000;
+      padding: 80px 80px 40px;
       display: grid;
       grid-template-columns: 1fr auto;
       gap: 40px;
-      align-items: start;
-      border-top: 1px solid rgba(200,169,110,0.1);
+      border-top: 1px solid rgba(255,255,255,0.05);
     }
     .footer-logo {
       font-family: 'Raleway', sans-serif;
       font-weight: 300;
       font-size: 18px;
       letter-spacing: 0.3em;
-      color: var(--white);
-      margin-bottom: 16px;
+      color: var(--pure-white);
+      margin-bottom: 24px;
     }
-    .footer-logo span { color: var(--white); }
-    footer p { font-size: 12px; color: var(--gray-text); line-height: 2; }
+    .footer-logo span { color: var(--gold); }
+    .footer-info { font-size: 13px; color: #888; line-height: 2.2; }
+    .footer-tel { 
+      display: block; 
+      font-size: 18px; 
+      color: var(--pure-white); 
+      text-decoration: none; 
+      margin-top: 10px;
+      letter-spacing: 0.1em;
+    }
 
-    .footer-links {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      list-style: none;
-      text-align: right;
-    }
-    .footer-links a {
-      font-size: 11px;
-      color: var(--gray-text);
-      text-decoration: none;
-      letter-spacing: 0.12em;
-      transition: color 0.3s;
-    }
+    .footer-links { display: flex; flex-direction: column; gap: 12px; list-style: none; text-align: right; }
+    .footer-links a { font-size: 11px; color: #666; text-decoration: none; letter-spacing: 0.12em; transition: color 0.3s; }
     .footer-links a:hover { color: var(--gold); }
 
     .footer-bottom {
+      grid-column: 1/-1;
       border-top: 1px solid rgba(255,255,255,0.05);
       margin-top: 40px;
       padding-top: 24px;
@@ -601,7 +521,7 @@
       justify-content: space-between;
       align-items: center;
     }
-    .footer-bottom p { font-size: 10px; color: rgba(136,136,136,0.5); letter-spacing: 0.08em; }
+    .footer-bottom p { font-size: 10px; color: rgba(136,136,136,0.4); }
 
     /* ── ANIMATIONS ── */
     @keyframes fadeUp {
@@ -612,49 +532,30 @@
       from { opacity: 0; }
       to   { opacity: 1; }
     }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.9s ease, transform 0.9s ease;
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.9s ease, transform 0.9s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 1024px) {
-      nav { padding: 20px 32px; }
+      nav { padding: 20px 32px; background: rgba(17,17,17,0.9); }
       .nav-links { display: none; }
       section { padding: 80px 32px; }
       #about { grid-template-columns: 1fr; }
-      .works-grid { grid-template-columns: 1fr 1fr; }
-      .services-grid { grid-template-columns: 1fr 1fr; }
-      footer { grid-template-columns: 1fr; padding: 48px 32px 32px; }
+      .works-grid, .services-grid { grid-template-columns: 1fr 1fr; }
+      footer { grid-template-columns: 1fr; padding: 60px 32px 32px; }
       .footer-links { text-align: left; }
-      #hero { padding: 60px 32px; }
-      .hero-scroll { display: none; }
-      .archive-grid { grid-template-columns: 1fr 1fr; }
-      .archive-item:first-child { grid-column: 1 / 3; grid-row: auto; }
     }
     @media (max-width: 640px) {
-      .works-grid { grid-template-columns: 1fr; }
-      .services-grid { grid-template-columns: 1fr; }
+      .works-grid, .services-grid, .archive-grid { grid-template-columns: 1fr; }
       .news-item { grid-template-columns: 1fr; gap: 8px; }
-      .news-arrow { display: none; }
-      .archive-grid { grid-template-columns: 1fr; }
-      .archive-item:first-child { grid-column: 1; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Cursor -->
   <div class="cursor" id="cursor"></div>
   <div class="cursor-ring" id="cursorRing"></div>
 
-  <!-- NAV -->
   <nav id="mainNav">
     <a href="#" class="logo">Inspire<span>Space</span>Media</a>
     <ul class="nav-links">
@@ -667,14 +568,11 @@
     <a href="#contact" class="nav-contact">Contact</a>
   </nav>
 
-  <!-- HERO -->
   <section id="hero">
     <div class="hero-video-wrap">
-      <!-- Replace VIDEO_ID with your YouTube video ID -->
       <iframe
-        src="https://www.youtube.com/embed/f0zp6sX6mFY?autoplay=1&mute=1&loop=1&rel=0&playlist=f0zp6sX6mFY"
+        src="https://www.youtube.com/embed/f0zp6sX6mFY?autoplay=1&mute=1&loop=1&rel=0&playlist=f0zp6sX6mFY&controls=0"
         allow="autoplay; encrypted-media"
-        allowfullscreen
         title="Hero video"
       ></iframe>
     </div>
@@ -698,22 +596,17 @@
     </div>
   </section>
 
-  <!-- NEWS TICKER -->
   <div class="ticker">
     <div class="ticker-inner">
       <div class="ticker-item"><span class="ticker-date">New</span><span>業務開局済み・全国包括申請済み ｜ ドローン撮影・点検・農薬散布 全国対応</span></div>
       <div class="ticker-item"><span class="ticker-date">Service</span><span>FPVドローン・マイクロドローン・通常ドローン撮影 承ります</span></div>
       <div class="ticker-item"><span class="ticker-date">YouTube</span><span>ドローン撮影・空撮映像をYouTubeで配信中</span></div>
       <div class="ticker-item"><span class="ticker-date">Contact</span><span>お仕事のご依頼・ご質問は dreamgate.omori@gmail.com まで</span></div>
-      <!-- duplicate for seamless loop -->
       <div class="ticker-item"><span class="ticker-date">New</span><span>業務開局済み・全国包括申請済み ｜ ドローン撮影・点検・農薬散布 全国対応</span></div>
       <div class="ticker-item"><span class="ticker-date">Service</span><span>FPVドローン・マイクロドローン・通常ドローン撮影 承ります</span></div>
-      <div class="ticker-item"><span class="ticker-date">YouTube</span><span>ドローン撮影・空撮映像をYouTubeで配信中</span></div>
-      <div class="ticker-item"><span class="ticker-date">Contact</span><span>お仕事のご依頼・ご質問は dreamgate.omori@gmail.com まで</span></div>
     </div>
   </div>
 
-  <!-- ABOUT -->
   <section id="about">
     <div class="about-text reveal">
       <div class="section-label">About Us</div>
@@ -722,221 +615,78 @@
       <p>FPVドローン・マイクロドローン・通常ドローンを駆使した撮影から、YouTube動画配信・映像企画制作編集まで一貫対応。業務開局済み・全国包括申請済みの安心対応です。</p>
     </div>
     <div class="about-video reveal">
-      <!-- Replace VIDEO_ID with your YouTube embed ID -->
-      <iframe
-        src="https://www.youtube.com/embed/gvE-NXEKYqY?rel=0"
-        allow="autoplay; encrypted-media"
-        allowfullscreen
-        title="About video"
-      ></iframe>
+      <iframe src="https://www.youtube.com/embed/gvE-NXEKYqY?rel=0" allowfullscreen title="About video"></iframe>
     </div>
   </section>
 
-  <!-- WORKS -->
   <section id="works">
     <div class="reveal">
       <div class="section-label">Works</div>
       <h2 class="section-title">OUR<br><em>Portfolio</em></h2>
     </div>
-
     <div class="works-grid reveal">
       <div class="work-item">
-        <iframe src="https://www.youtube.com/embed/f0zp6sX6mFY?rel=0" allowfullscreen title="Work 1"></iframe>
+        <iframe src="https://www.youtube.com/embed/f0zp6sX6mFY?rel=0" allowfullscreen></iframe>
         <div class="work-overlay"></div>
-        <div class="work-label">
-          <h4>桜ドローンプロジェクト 2025</h4>
-          <span>FPV Micro Drone</span>
-        </div>
+        <div class="work-label"><h4>桜ドローンプロジェクト 2025</h4><span>FPV Micro Drone</span></div>
       </div>
       <div class="work-item">
-        <iframe src="https://www.youtube.com/embed/gvE-NXEKYqY?rel=0" allowfullscreen title="Work 2"></iframe>
+        <iframe src="https://www.youtube.com/embed/gvE-NXEKYqY?rel=0" allowfullscreen></iframe>
         <div class="work-overlay"></div>
-        <div class="work-label">
-          <h4>大阪・関西万博 空撮</h4>
-          <span>8K Aerial</span>
-        </div>
+        <div class="work-label"><h4>大阪・関西万博 空撮</h4><span>8K Aerial</span></div>
       </div>
       <div class="work-item">
-        <iframe src="https://www.youtube.com/embed/s-JitfEZm5A?rel=0" allowfullscreen title="Work 3"></iframe>
+        <iframe src="https://www.youtube.com/embed/s-JitfEZm5A?rel=0" allowfullscreen></iframe>
         <div class="work-overlay"></div>
-        <div class="work-label">
-          <h4>タンザニア 野生動物 8K撮影</h4>
-          <span>Wildlife Documentary</span>
-        </div>
-      </div>
-      <div class="work-item">
-        <iframe src="https://www.youtube.com/embed/YpF4ocHGs8I?rel=0" allowfullscreen title="Work 4"></iframe>
-        <div class="work-overlay"></div>
-        <div class="work-label">
-          <h4>CM / PV 空撮</h4>
-          <span>Commercial</span>
-        </div>
-      </div>
-      <div class="work-item">
-        <iframe src="https://www.youtube.com/embed/uhn7I3HSFw4?rel=0" allowfullscreen title="Work 5"></iframe>
-        <div class="work-overlay"></div>
-        <div class="work-label">
-          <h4>音楽 MV 撮影</h4>
-          <span>Music Video</span>
-        </div>
-      </div>
-      <div class="work-item">
-        <iframe src="https://www.youtube.com/embed/6RW7REGFUkA?rel=0" allowfullscreen title="Work 6"></iframe>
-        <div class="work-overlay"></div>
-        <div class="work-label">
-          <h4>イベント空撮</h4>
-          <span>Event</span>
-        </div>
+        <div class="work-label"><h4>Wildlife Documentary</h4><span>8K Drone</span></div>
       </div>
     </div>
   </section>
 
-  <!-- SERVICES -->
   <section id="services">
     <div class="reveal">
       <div class="section-label">Services</div>
       <h2 class="section-title">WHAT WE<br><em>Offer</em></h2>
     </div>
     <div class="services-grid reveal">
-      <div class="service-card">
-        <div class="service-number">01</div>
-        <div class="service-icon">🚁</div>
-        <h3>ドローン撮影</h3>
-        <p>FPVドローン・マイクロドローン・通常ドローンによる空撮映像制作。業務開局済み・全国包括申請済みで全国対応可能です。</p>
-      </div>
-      <div class="service-card">
-        <div class="service-number">02</div>
-        <div class="service-icon">🎬</div>
-        <h3>動画企画・制作・編集</h3>
-        <p>企画立案から撮影・編集・納品まで一貫対応。イベント、CM、プロモーション映像など幅広い映像制作に対応します。</p>
-      </div>
-      <div class="service-card">
-        <div class="service-number">03</div>
-        <div class="service-icon">🏗️</div>
-        <h3>ドローン点検</h3>
-        <p>外壁・屋根・施設などのドローン点検業務。足場不要で安全・低コスト・短時間での点検を実現します。</p>
-      </div>
-      <div class="service-card">
-        <div class="service-number">04</div>
-        <div class="service-icon">🌾</div>
-        <h3>ドローン農薬散布</h3>
-        <p>農業用ドローンによる農薬散布オペレーター業務。広い農地を効率的・安全に対応します。</p>
-      </div>
-      <div class="service-card">
-        <div class="service-number">05</div>
-        <div class="service-icon">▶️</div>
-        <h3>YouTube 動画配信・制作</h3>
-        <p>YouTube チャンネルの映像企画・撮影・編集・運用サポート。ドローン映像・空撮・映像制作など幅広く対応します。</p>
-      </div>
-      <div class="service-card">
-        <div class="service-number">06</div>
-        <div class="service-icon">📋</div>
-        <h3>JMAドローンインストラクター</h3>
-        <p>JMA認定のドローンインストラクターによる操縦指導・講習。初心者から業務利用者まで丁寧に対応します。</p>
-      </div>
+      <div class="service-card"><div class="service-number">01</div><h3>ドローン撮影</h3><p>FPV・マイクロ・通常ドローン。全国対応。</p></div>
+      <div class="service-card"><div class="service-number">02</div><h3>動画制作</h3><p>企画から編集まで一貫対応。</p></div>
+      <div class="service-card"><div class="service-number">03</div><h3>ドローン点検</h3><p>外壁・屋根・施設点検。低コストで安全。</p></div>
     </div>
   </section>
 
-  <!-- ARCHIVE -->
-  <section id="archive">
-    <div class="reveal">
-      <div class="section-label">Video Archive</div>
-      <h2 class="section-title">ARCHIVE<br><em>Collection</em></h2>
-    </div>
-    <div class="archive-grid reveal">
-      <div class="archive-item">
-        <iframe src="https://www.youtube.com/embed/1rJ9VioG6-0?rel=0" allowfullscreen title="Archive 1"></iframe>
-      </div>
-      <div class="archive-item">
-        <iframe src="https://www.youtube.com/embed/f0zp6sX6mFY?rel=0" allowfullscreen title="Archive 2"></iframe>
-      </div>
-      <div class="archive-item">
-        <iframe src="https://www.youtube.com/embed/gvE-NXEKYqY?rel=0" allowfullscreen title="Archive 3"></iframe>
-      </div>
-      <div class="archive-item">
-        <iframe src="https://www.youtube.com/embed/s-JitfEZm5A?rel=0" allowfullscreen title="Archive 4"></iframe>
-      </div>
-      <div class="archive-item">
-        <iframe src="https://www.youtube.com/embed/YpF4ocHGs8I?rel=0" allowfullscreen title="Archive 5"></iframe>
-      </div>
-    </div>
-  </section>
-
-  <!-- NEWS -->
-  <section id="news">
-    <div class="reveal">
-      <div class="section-label">News</div>
-      <h2 class="section-title">WHAT'S<br><em>New</em></h2>
-    </div>
-    <div class="news-list reveal">
-      <a href="#" class="news-item">
-        <span class="news-date">2026.04.22</span>
-        <span class="news-tag">New</span>
-        <span class="news-title">nspireSpaceMedia 新ホームページを公開しました</span>
-        <span class="news-arrow">→</span>
-      </a>
-      <a href="#" class="news-item">
-        <span class="news-date">2026.01.01</span>
-        <span class="news-tag">Info</span>
-        <span class="news-title">業務開局済み・全国包括申請済み。全国どこでもドローン撮影対応します</span>
-        <span class="news-arrow">→</span>
-      </a>
-      <a href="#" class="news-item">
-        <span class="news-date">2025.10.01</span>
-        <span class="news-tag">Service</span>
-        <span class="news-title">ドローン農薬散布オペレーターサービスを開始しました</span>
-        <span class="news-arrow">→</span>
-      </a>
-      <a href="#" class="news-item">
-        <span class="news-date">2025.06.01</span>
-        <span class="news-tag">YouTube</span>
-        <span class="news-title">ドローン空撮映像をYouTubeで配信中。チャンネル登録お待ちしております</span>
-        <span class="news-arrow">→</span>
-      </a>
-      <a href="#" class="news-item">
-        <span class="news-date">2025.04.01</span>
-        <span class="news-tag">Works</span>
-        <span class="news-title">外壁・屋根・施設のドローン点検サービス 受付中</span>
-        <span class="news-arrow">→</span>
-      </a>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
   <section id="contact">
     <div class="contact-inner reveal">
       <div class="section-label" style="justify-content:center;">Contact Us</div>
-      <h2 class="section-title" style="margin-bottom:20px;">LET'S<br><em>Work Together</em></h2>
-      <p>ドローン撮影・動画制作・点検業務など、お仕事のご依頼・ご質問はお気軽にご連絡ください。</p>
+      <h2 class="section-title">LET'S<br><em>Work Together</em></h2>
+      <p>お仕事のご依頼・ご質問はお気軽にご連絡ください。</p>
       <a href="mailto:dreamgate.omori@gmail.com" class="contact-btn">お問い合わせ / Contact</a>
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer>
     <div>
       <div class="footer-logo">Inspire<span>Space</span>Media</div>
-      <p>合同会社 Drem Gate<br>
-         〒370-1301 群馬県高崎市新町3023 小菅アーバン101<br>
-         代表社員　大森 利勝<br>
-         dreamgate.omori@gmail.com</p>
+      <div class="footer-info">
+        合同会社 Drem Gate<br>
+        〒370-1301 群馬県高崎市新町3023 小菅アーバン101<br>
+        <a href="tel:08034918585" class="footer-tel">TEL: 080-3491-8585</a>
+        代表社員　大森 利勝<br>
+        Email: dreamgate.omori@gmail.com
+      </div>
     </div>
     <ul class="footer-links">
       <li><a href="#about">About</a></li>
       <li><a href="#works">Works</a></li>
       <li><a href="#services">Services</a></li>
-      <li><a href="#archive">Archive</a></li>
-      <li><a href="#news">News</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-    <div class="footer-bottom" style="grid-column:1/-1;">
-      <p>© 2026 合同会社 Drem Gate / InspireSpaceMedia. All rights reserved.</p>
-      <p style="color:rgba(136,136,136,0.3);">Designed with Claude</p>
+    <div class="footer-bottom">
+      <p>© 2026 合同会社 Drem Gate / InspireSpaceMedia.</p>
     </div>
   </footer>
 
   <script>
-    // ── Cursor ──
     const cursor = document.getElementById('cursor');
     const ring   = document.getElementById('cursorRing');
     let rx = 0, ry = 0;
@@ -944,34 +694,24 @@
     document.addEventListener('mousemove', e => {
       cursor.style.left = e.clientX + 'px';
       cursor.style.top  = e.clientY + 'px';
-      rx += (e.clientX - rx) * 0.12;
-      ry += (e.clientY - ry) * 0.12;
+    });
+
+    function updateRing() {
+      const cx = parseFloat(cursor.style.left || 0);
+      const cy = parseFloat(cursor.style.top || 0);
+      rx += (cx - rx) * 0.12;
+      ry += (cy - ry) * 0.12;
       ring.style.left = rx + 'px';
       ring.style.top  = ry + 'px';
-    });
+      requestAnimationFrame(updateRing);
+    }
+    updateRing();
 
-    document.querySelectorAll('a, button').forEach(el => {
-      el.addEventListener('mouseenter', () => {
-        cursor.style.width = '20px';
-        cursor.style.height = '20px';
-        ring.style.width = '56px';
-        ring.style.height = '56px';
-      });
-      el.addEventListener('mouseleave', () => {
-        cursor.style.width = '10px';
-        cursor.style.height = '10px';
-        ring.style.width = '36px';
-        ring.style.height = '36px';
-      });
-    });
-
-    // ── Nav scroll ──
     const nav = document.getElementById('mainNav');
     window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 60);
+      nav.classList.toggle('scrolled', window.scrollY > 100);
     });
 
-    // ── Reveal on scroll ──
     const revealEls = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver(entries => {
       entries.forEach(e => {
@@ -982,16 +722,6 @@
       });
     }, { threshold: 0.1 });
     revealEls.forEach(el => observer.observe(el));
-
-    // ── Smooth cursor ring update ──
-    function updateRing() {
-      rx += (parseFloat(cursor.style.left || 0) - rx) * 0.12;
-      ry += (parseFloat(cursor.style.top || 0) - ry) * 0.12;
-      ring.style.left = rx + 'px';
-      ring.style.top  = ry + 'px';
-      requestAnimationFrame(updateRing);
-    }
-    updateRing();
   </script>
 </body>
 </html>
