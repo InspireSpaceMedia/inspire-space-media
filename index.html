@@ -11,20 +11,20 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --black: #080808;
-      --white: #f5f0eb;
-      --gold: #c8a96e;
-      --gold-dim: rgba(200,169,110,0.15);
-      --gray: #1a1a1a;
-      --gray-text: #888;
-      --accent: #e8d5a3;
+      --black: #111111;
+      --white: #f8f7f4;
+      --gold: #111111;
+      --gold-dim: rgba(0,0,0,0.05);
+      --gray: #eeece9;
+      --gray-text: #999;
+      --accent: #333;
     }
 
     html { scroll-behavior: smooth; }
 
     body {
-      background: var(--black);
-      color: var(--white);
+      background: var(--white);
+      color: var(--black);
       font-family: 'Noto Sans JP', sans-serif;
       font-weight: 300;
       overflow-x: hidden;
@@ -62,20 +62,20 @@
       align-items: center;
       justify-content: space-between;
       padding: 24px 48px;
-      background: linear-gradient(to bottom, rgba(8,8,8,0.9), transparent);
+      background: linear-gradient(to bottom, rgba(248,247,244,0.95), transparent);
       transition: background 0.4s;
     }
-    nav.scrolled { background: rgba(8,8,8,0.97); }
+    nav.scrolled { background: rgba(248,247,244,0.98); border-bottom: 1px solid rgba(0,0,0,0.08); }
 
     .logo {
       font-family: 'Raleway', sans-serif;
       font-weight: 300;
       font-size: 20px;
       letter-spacing: 0.3em;
-      color: var(--white);
+      color: var(--black);
       text-decoration: none;
     }
-    .logo span { color: var(--white); }
+    .logo span { color: var(--black); }
 
     .nav-links {
       display: flex;
@@ -83,26 +83,26 @@
       list-style: none;
     }
     .nav-links a {
-      color: rgba(245,240,235,0.65);
+      color: rgba(17,17,17,0.5);
       text-decoration: none;
       font-size: 11px;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       transition: color 0.3s;
     }
-    .nav-links a:hover { color: var(--gold); }
+    .nav-links a:hover { color: var(--black); }
 
     .nav-contact {
-      border: 1px solid var(--gold);
+      border: 1px solid var(--black);
       padding: 8px 24px;
       font-size: 10px;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--gold);
+      color: var(--black);
       text-decoration: none;
       transition: background 0.3s, color 0.3s;
     }
-    .nav-contact:hover { background: var(--gold); color: var(--black); }
+    .nav-contact:hover { background: var(--black); color: var(--white); }
 
     /* ── HERO ── */
     #hero {
@@ -160,20 +160,21 @@
     .hero-title {
       font-family: 'Raleway', sans-serif;
       font-weight: 200;
-      font-size: clamp(52px, 8vw, 105px);
-      line-height: 0.95;
+      font-size: clamp(32px, 5vw, 72px);
+      line-height: 1.1;
       letter-spacing: 0.12em;
-      margin-bottom: 28px;
+      margin-bottom: 16px;
       opacity: 0;
       animation: fadeUp 1s 0.7s ease forwards;
     }
     .hero-title em {
       font-family: 'Cormorant Garamond', serif;
       font-style: italic;
-      color: var(--white);
+      color: rgba(255,255,255,0.9);
       display: block;
-      font-size: 0.65em;
+      font-size: clamp(28px, 4vw, 56px);
       letter-spacing: 0.06em;
+      margin-top: 12px;
     }
     .hero-sub {
       font-size: 14px;
@@ -239,9 +240,9 @@
 
     /* ── NEWS TICKER ── */
     .ticker {
-      background: var(--gold-dim);
-      border-top: 1px solid rgba(200,169,110,0.2);
-      border-bottom: 1px solid rgba(200,169,110,0.2);
+      background: #111;
+      border-top: none;
+      border-bottom: none;
       padding: 14px 0;
       overflow: hidden;
     }
@@ -250,6 +251,7 @@
       gap: 80px;
       animation: ticker 30s linear infinite;
       white-space: nowrap;
+      color: rgba(255,255,255,0.6);
     }
     .ticker-item {
       display: flex;
@@ -259,7 +261,7 @@
       letter-spacing: 0.1em;
     }
     .ticker-date {
-      color: var(--gold);
+      color: rgba(255,255,255,0.3);
       font-size: 10px;
     }
     @keyframes ticker {
@@ -277,7 +279,7 @@
       font-size: 10px;
       letter-spacing: 0.4em;
       text-transform: uppercase;
-      color: var(--gold);
+      color: #999;
       margin-bottom: 16px;
     }
     .section-label::before {
@@ -285,21 +287,23 @@
       display: block;
       width: 40px;
       height: 1px;
-      background: var(--gold);
+      background: #ccc;
     }
 
     .section-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(42px, 6vw, 80px);
-      letter-spacing: 0.06em;
-      line-height: 1;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 200;
+      font-size: clamp(38px, 5vw, 72px);
+      letter-spacing: 0.08em;
+      line-height: 1.05;
       margin-bottom: 60px;
+      color: var(--black);
     }
     .section-title em {
       font-family: 'Cormorant Garamond', serif;
       font-style: italic;
-      color: var(--white);
-      font-size: 0.7em;
+      color: #555;
+      font-size: 0.8em;
       display: block;
     }
 
@@ -313,7 +317,7 @@
     .about-text p {
       font-size: 15px;
       line-height: 2.2;
-      color: rgba(245,240,235,0.75);
+      color: rgba(17,17,17,0.65);
       margin-bottom: 20px;
     }
     .about-video {
@@ -330,13 +334,13 @@
       content: '';
       position: absolute;
       inset: -1px;
-      border: 1px solid rgba(200,169,110,0.3);
+      border: 1px solid rgba(0,0,0,0.1);
       z-index: 1;
       pointer-events: none;
     }
 
     /* ── WORKS ── */
-    #works { background: #0c0c0c; }
+    #works { background: #eeece9; }
 
     .works-grid {
       display: grid;
@@ -390,7 +394,7 @@
     }
 
     .service-card {
-      background: var(--gray);
+      background: #fff;
       padding: 48px 36px;
       border-bottom: 2px solid transparent;
       transition: border-color 0.3s, background 0.3s;
@@ -402,16 +406,17 @@
       position: absolute;
       bottom: 0; left: 0;
       width: 0; height: 2px;
-      background: var(--gold);
+      background: var(--black);
       transition: width 0.5s ease;
     }
     .service-card:hover::before { width: 100%; }
-    .service-card:hover { background: #1f1e1b; }
+    .service-card:hover { background: #f5f3f0; }
 
     .service-number {
-      font-family: 'Bebas Neue', sans-serif;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 200;
       font-size: 72px;
-      color: rgba(200,169,110,0.08);
+      color: rgba(0,0,0,0.05);
       line-height: 1;
       margin-bottom: -20px;
     }
@@ -424,15 +429,16 @@
       font-weight: 500;
       letter-spacing: 0.05em;
       margin-bottom: 14px;
+      color: var(--black);
     }
     .service-card p {
       font-size: 13px;
       line-height: 2;
-      color: rgba(245,240,235,0.55);
+      color: rgba(17,17,17,0.5);
     }
 
     /* ── VIDEO ARCHIVE ── */
-    #archive { background: #0a0a0a; }
+    #archive { background: #eeece9; }
 
     .archive-grid {
       display: grid;
@@ -443,7 +449,7 @@
     .archive-item {
       position: relative;
       overflow: hidden;
-      background: #111;
+      background: #ddd;
     }
     .archive-item:first-child {
       grid-row: 1 / 3;
@@ -474,20 +480,20 @@
       align-items: center;
       gap: 32px;
       padding: 24px 0;
-      border-bottom: 1px solid rgba(245,240,235,0.08);
+      border-bottom: 1px solid rgba(0,0,0,0.08);
       text-decoration: none;
-      color: var(--white);
+      color: var(--black);
       transition: padding-left 0.3s;
     }
     .news-item:hover { padding-left: 12px; }
     .news-item:hover .news-arrow { opacity: 1; transform: translateX(0); }
-    .news-date { font-size: 12px; color: var(--gray-text); letter-spacing: 0.08em; }
+    .news-date { font-size: 12px; color: #aaa; letter-spacing: 0.08em; }
     .news-tag {
       font-size: 9px;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: var(--gold);
-      border: 1px solid rgba(200,169,110,0.4);
+      color: #555;
+      border: 1px solid rgba(0,0,0,0.2);
       padding: 3px 10px;
       text-align: center;
     }
@@ -495,32 +501,33 @@
       font-size: 14px;
       font-weight: 400;
       line-height: 1.6;
-      color: rgba(245,240,235,0.8);
+      color: rgba(17,17,17,0.7);
     }
     .news-arrow {
       opacity: 0;
       transform: translateX(-8px);
       transition: all 0.3s;
-      color: var(--gold);
+      color: var(--black);
       font-size: 18px;
       margin-left: auto;
     }
 
     /* ── CONTACT ── */
     #contact {
-      background: var(--gray);
+      background: #111;
       text-align: center;
       position: relative;
       overflow: hidden;
     }
     #contact::before {
       content: 'CONTACT';
-      font-family: 'Bebas Neue', sans-serif;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 200;
       font-size: clamp(80px, 15vw, 220px);
       position: absolute;
       top: 50%; left: 50%;
       transform: translate(-50%, -50%);
-      color: rgba(200,169,110,0.04);
+      color: rgba(255,255,255,0.03);
       letter-spacing: 0.1em;
       white-space: nowrap;
       pointer-events: none;
@@ -529,14 +536,17 @@
     #contact p {
       font-size: 15px;
       line-height: 2.2;
-      color: rgba(245,240,235,0.6);
+      color: rgba(255,255,255,0.5);
       max-width: 520px;
       margin: 0 auto 48px;
     }
+    #contact .section-label { color: rgba(255,255,255,0.3); }
+    #contact .section-title { color: #fff; }
+    #contact .section-title em { color: rgba(255,255,255,0.5); }
     .contact-btn {
       display: inline-block;
-      border: 1px solid var(--gold);
-      color: var(--gold);
+      border: 1px solid rgba(255,255,255,0.4);
+      color: #fff;
       text-decoration: none;
       padding: 18px 64px;
       font-size: 11px;
@@ -544,11 +554,11 @@
       text-transform: uppercase;
       transition: background 0.3s, color 0.3s;
     }
-    .contact-btn:hover { background: var(--gold); color: var(--black); }
+    .contact-btn:hover { background: #fff; color: #111; }
 
     /* ── FOOTER ── */
     footer {
-      background: #050505;
+      background: #111;
       padding: 60px 80px 40px;
       display: grid;
       grid-template-columns: 1fr auto;
