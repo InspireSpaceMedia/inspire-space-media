@@ -14,7 +14,7 @@
       --black: #111111;
       --white: #f8f7f4;
       --pure-white: #ffffff;
-      --gold: #c8a96e; /* ロゴやアクセント用にゴールドを定義 */
+      --gold: #c8a96e;
       --gold-dim: rgba(200,169,110,0.1);
       --gray: #eeece9;
       --gray-text: #999;
@@ -32,7 +32,6 @@
       cursor: none;
     }
 
-    /* Custom cursor */
     .cursor {
       position: fixed;
       width: 10px; height: 10px;
@@ -54,7 +53,6 @@
       transition: all 0.12s ease;
     }
 
-    /* ── NAV ── */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -63,7 +61,7 @@
       align-items: center;
       justify-content: space-between;
       padding: 24px 48px;
-      background: transparent; /* 初期は透明 */
+      background: transparent;
       transition: background 0.4s, padding 0.4s;
     }
     nav.scrolled { 
@@ -77,7 +75,7 @@
       font-weight: 300;
       font-size: 20px;
       letter-spacing: 0.3em;
-      color: var(--pure-white); /* 白文字に変更 */
+      color: var(--pure-white);
       text-decoration: none;
     }
     .logo span { color: var(--gold); }
@@ -88,7 +86,7 @@
       list-style: none;
     }
     .nav-links a {
-      color: rgba(255,255,255,0.7); /* 白透過に変更 */
+      color: rgba(255,255,255,0.7);
       text-decoration: none;
       font-size: 11px;
       letter-spacing: 0.18em;
@@ -109,7 +107,6 @@
     }
     .nav-contact:hover { background: var(--pure-white); color: var(--black); }
 
-    /* ── HERO ── */
     #hero {
       position: relative;
       width: 100%;
@@ -118,7 +115,7 @@
       display: flex;
       align-items: flex-end;
       padding: 80px 80px;
-      color: var(--pure-white); /* ヒーロー内テキストを白に */
+      color: var(--pure-white);
     }
 
     .hero-video-wrap {
@@ -129,7 +126,7 @@
     .hero-video-wrap iframe {
       position: absolute;
       top: 50%; left: 50%;
-      width: 177.78vh; /* 16:9 */
+      width: 177.78vh;
       height: 56.25vw;
       min-width: 100%; min-height: 100%;
       transform: translate(-50%, -50%);
@@ -244,7 +241,6 @@
       100% { transform: scaleY(0); transform-origin: bottom; opacity: 0; }
     }
 
-    /* ── NEWS TICKER ── */
     .ticker {
       background: #000;
       padding: 14px 0;
@@ -273,7 +269,6 @@
       to { transform: translateX(-50%); }
     }
 
-    /* ── SECTIONS ── */
     section { padding: 120px 80px; }
 
     .section-label {
@@ -311,7 +306,6 @@
       display: block;
     }
 
-    /* ── ABOUT ── */
     #about {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -335,53 +329,26 @@
       border: none;
     }
 
-    /* ── WORKS ── */
     #works { background: #eeece9; }
-    .works-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2px;
-      margin-bottom: 60px;
-    }
-    .work-item {
-      position: relative;
-      aspect-ratio: 16/9;
-      overflow: hidden;
-      background: #111;
-      cursor: none;
-    }
-    .work-item iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-      transition: transform 0.6s ease;
-    }
-    .work-item:hover iframe { transform: scale(1.04); }
-    .work-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.85), transparent 50%);
-      opacity: 0;
-      transition: opacity 0.4s;
-      z-index: 2;
-      pointer-events: none;
-    }
-    .work-item:hover .work-overlay { opacity: 1; }
-    .work-label {
-      position: absolute;
-      bottom: 20px; left: 20px;
-      z-index: 3;
-      opacity: 0;
-      transform: translateY(8px);
-      transition: all 0.4s;
-      pointer-events: none;
-      color: #fff;
-    }
-    .work-item:hover .work-label { opacity: 1; transform: translateY(0); }
-    .work-label h4 { font-size: 13px; letter-spacing: 0.08em; margin-bottom: 4px; }
-    .work-label span { font-size: 10px; color: var(--gold); letter-spacing: 0.15em; }
 
-    /* ── SERVICES ── */
+    /* 作品準備中プレースホルダー */
+    .works-coming-soon {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 40px;
+      border: 1px dashed rgba(0,0,0,0.15);
+      text-align: center;
+      gap: 16px;
+    }
+    .works-coming-soon p {
+      font-size: 13px;
+      color: #aaa;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
     .services-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -414,38 +381,9 @@
       line-height: 1;
       margin-bottom: -20px;
     }
-    .service-icon { font-size: 32px; margin-bottom: 20px; }
     .service-card h3 { font-size: 17px; font-weight: 500; margin-bottom: 14px; }
     .service-card p { font-size: 13px; line-height: 2; color: rgba(17,17,17,0.5); }
 
-    /* ── ARCHIVE ── */
-    #archive { background: #eeece9; }
-    .archive-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
-      gap: 2px;
-    }
-    .archive-item { position: relative; overflow: hidden; background: #ddd; }
-    .archive-item:first-child { grid-row: 1 / 3; }
-    .archive-item iframe { width: 100%; height: 100%; border: none; min-height: 200px; display: block; }
-
-    /* ── NEWS ── */
-    .news-item {
-      display: grid;
-      grid-template-columns: 160px 100px 1fr 40px;
-      align-items: center;
-      gap: 32px;
-      padding: 24px 0;
-      border-bottom: 1px solid rgba(0,0,0,0.08);
-      text-decoration: none;
-      color: var(--black);
-      transition: padding-left 0.3s;
-    }
-    .news-item:hover { padding-left: 12px; }
-    .news-date { font-size: 12px; color: #aaa; }
-    .news-tag { font-size: 9px; border: 1px solid rgba(0,0,0,0.2); padding: 3px 10px; text-align: center; }
-
-    /* ── CONTACT ── */
     #contact {
       background: #111;
       text-align: center;
@@ -480,7 +418,6 @@
     }
     .contact-btn:hover { background: #fff; color: #111; }
 
-    /* ── FOOTER ── */
     footer {
       background: #000;
       padding: 80px 80px 40px;
@@ -523,7 +460,6 @@
     }
     .footer-bottom p { font-size: 10px; color: rgba(136,136,136,0.4); }
 
-    /* ── ANIMATIONS ── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(30px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -535,19 +471,17 @@
     .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.9s ease, transform 0.9s ease; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
-    /* ── RESPONSIVE ── */
     @media (max-width: 1024px) {
       nav { padding: 20px 32px; background: rgba(17,17,17,0.9); }
       .nav-links { display: none; }
       section { padding: 80px 32px; }
       #about { grid-template-columns: 1fr; }
-      .works-grid, .services-grid { grid-template-columns: 1fr 1fr; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
       footer { grid-template-columns: 1fr; padding: 60px 32px 32px; }
       .footer-links { text-align: left; }
     }
     @media (max-width: 640px) {
-      .works-grid, .services-grid, .archive-grid { grid-template-columns: 1fr; }
-      .news-item { grid-template-columns: 1fr; gap: 8px; }
+      .services-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -562,8 +496,7 @@
       <li><a href="#about">About</a></li>
       <li><a href="#works">Works</a></li>
       <li><a href="#services">Services</a></li>
-      <li><a href="#archive">Archive</a></li>
-      <li><a href="#news">News</a></li>
+      <li><a href="#contact">Contact</a></li>
     </ul>
     <a href="#contact" class="nav-contact">Contact</a>
   </nav>
@@ -624,22 +557,8 @@
       <div class="section-label">Works</div>
       <h2 class="section-title">OUR<br><em>Portfolio</em></h2>
     </div>
-    <div class="works-grid reveal">
-      <div class="work-item">
-        <iframe src="https://www.youtube.com/embed/f0zp6sX6mFY?rel=0" allowfullscreen></iframe>
-        <div class="work-overlay"></div>
-        <div class="work-label"><h4>桜ドローンプロジェクト 2025</h4><span>FPV Micro Drone</span></div>
-      </div>
-      <div class="work-item">
-        <iframe src="https://www.youtube.com/embed/gvE-NXEKYqY?rel=0" allowfullscreen></iframe>
-        <div class="work-overlay"></div>
-        <div class="work-label"><h4>大阪・関西万博 空撮</h4><span>8K Aerial</span></div>
-      </div>
-      <div class="work-item">
-        <iframe src="https://www.youtube.com/embed/s-JitfEZm5A?rel=0" allowfullscreen></iframe>
-        <div class="work-overlay"></div>
-        <div class="work-label"><h4>Wildlife Documentary</h4><span>8K Drone</span></div>
-      </div>
+    <div class="works-coming-soon reveal">
+      <p>Coming Soon — 新しい作品を準備中です</p>
     </div>
   </section>
 
