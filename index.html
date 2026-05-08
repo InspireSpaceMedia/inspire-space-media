@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Inspire Space Media – 空から、心を動かす。</title>
+  <title>InspireSpaceMedia – 空から、心を動かす。</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Raleway:wght@200;300;400;600&family=Noto+Sans+JP:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,300;1,300&display=swap" rel="stylesheet" />
@@ -14,7 +14,10 @@
       --white: #f8f7f4;
       --pure-white: #ffffff;
       --gold: #c8a96e;
+      --gold-dim: rgba(200,169,110,0.1);
       --gray: #eeece9;
+      --gray-text: #999;
+      --accent: #333;
     }
     html { scroll-behavior: smooth; }
     body {
@@ -26,52 +29,249 @@
       cursor: none;
     }
 
-    /* Cursor */
-    .cursor { position: fixed; width: 10px; height: 10px; background: var(--gold); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: width 0.2s, height 0.2s; }
-    .cursor-ring { position: fixed; width: 36px; height: 36px; border: 1px solid rgba(200,169,110,0.5); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%, -50%); }
+    .cursor {
+      position: fixed; width: 10px; height: 10px;
+      background: var(--gold); border-radius: 50%;
+      pointer-events: none; z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: width 0.2s, height 0.2s, background 0.2s;
+    }
+    .cursor-ring {
+      position: fixed; width: 36px; height: 36px;
+      border: 1px solid rgba(200,169,110,0.5); border-radius: 50%;
+      pointer-events: none; z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: all 0.12s ease;
+    }
 
-    /* Nav */
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 24px 48px; background: transparent; transition: all 0.4s; }
-    nav.scrolled { background: rgba(17,17,17,0.95); padding: 16px 48px; }
-    .logo { font-family: 'Raleway', sans-serif; font-size: 20px; letter-spacing: 0.3em; color: var(--pure-white); text-decoration: none; }
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 24px 48px; background: transparent;
+      transition: background 0.4s, padding 0.4s;
+    }
+    nav.scrolled { background: rgba(17,17,17,0.95); border-bottom: 1px solid rgba(255,255,255,0.1); padding: 16px 48px; }
+    .logo { font-family: 'Raleway', sans-serif; font-weight: 300; font-size: 20px; letter-spacing: 0.3em; color: var(--pure-white); text-decoration: none; }
     .logo span { color: var(--gold); }
     .nav-links { display: flex; gap: 36px; list-style: none; }
-    .nav-links a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; }
+    .nav-links a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; transition: color 0.3s; }
     .nav-links a:hover { color: var(--pure-white); }
+    .nav-contact { border: 1px solid var(--pure-white); padding: 8px 24px; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--pure-white); text-decoration: none; transition: background 0.3s, color 0.3s; }
+    .nav-contact:hover { background: var(--pure-white); color: var(--black); }
 
-    /* Hero */
-    #hero { position: relative; width: 100%; height: 100vh; overflow: hidden; display: flex; align-items: flex-end; padding: 80px 80px; color: var(--pure-white); }
+    #hero {
+      position: relative; width: 100%; height: 100vh; overflow: hidden;
+      display: flex; align-items: flex-end; padding: 80px 80px; color: var(--pure-white);
+    }
     .hero-video-wrap { position: absolute; inset: 0; z-index: 0; }
-    .hero-video-wrap iframe { position: absolute; top: 50%; left: 50%; width: 177.78vh; height: 56.25vw; min-width: 100%; min-height: 100%; transform: translate(-50%, -50%); border: none; }
-    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%); z-index: 1; }
+    .hero-video-wrap iframe {
+      position: absolute; top: 50%; left: 50%;
+      width: 177.78vh; height: 56.25vw;
+      min-width: 100%; min-height: 100%;
+      transform: translate(-50%, -50%); pointer-events: none; border: none;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.4) 100%);
+      z-index: 1;
+    }
     .hero-content { position: relative; z-index: 2; max-width: 800px; }
-    .hero-title { font-family: 'Raleway', sans-serif; font-size: clamp(32px, 5vw, 72px); line-height: 1.1; margin-bottom: 16px; }
-    .hero-title em { font-family: 'Cormorant Garamond', serif; font-style: italic; display: block; font-size: 0.7em; }
+    .hero-eyebrow { font-size: 10px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 24px; opacity: 0; animation: fadeUp 1s 0.4s ease forwards; }
+    .hero-title { font-family: 'Raleway', sans-serif; font-weight: 200; font-size: clamp(32px, 5vw, 72px); line-height: 1.1; letter-spacing: 0.12em; margin-bottom: 16px; opacity: 0; animation: fadeUp 1s 0.7s ease forwards; color: var(--pure-white); }
+    .hero-title em { font-family: 'Cormorant Garamond', serif; font-style: italic; color: rgba(255,255,255,0.8); display: block; font-size: clamp(28px, 4vw, 56px); letter-spacing: 0.06em; margin-top: 12px; }
+    .hero-sub { font-size: 14px; line-height: 2; color: rgba(255,255,255,0.8); max-width: 460px; margin-bottom: 40px; opacity: 0; animation: fadeUp 1s 1s ease forwards; }
+    .hero-cta { display: inline-flex; align-items: center; gap: 16px; font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--pure-white); text-decoration: none; opacity: 0; animation: fadeUp 1s 1.2s ease forwards; }
+    .hero-cta::after { content: ''; display: block; width: 60px; height: 1px; background: var(--gold); transition: width 0.3s; }
+    .hero-cta:hover::after { width: 100px; }
+    .hero-scroll { position: absolute; bottom: 48px; right: 80px; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 12px; opacity: 0; animation: fadeIn 1.5s 1.8s ease forwards; }
+    .hero-scroll span { font-size: 9px; letter-spacing: 0.35em; text-transform: uppercase; color: rgba(255,255,255,0.5); writing-mode: vertical-rl; }
+    .scroll-line { width: 1px; height: 60px; background: linear-gradient(to bottom, var(--gold), transparent); animation: scrollLine 2s 2s infinite ease; }
+    @keyframes scrollLine {
+      0% { transform: scaleY(0); transform-origin: top; opacity: 1; }
+      50% { transform: scaleY(1); transform-origin: top; opacity: 1; }
+      100% { transform: scaleY(0); transform-origin: bottom; opacity: 0; }
+    }
 
-    /* Portfolio Section */
-    section { padding: 100px 80px; }
-    .section-label { font-size: 10px; letter-spacing: 0.4em; text-transform: uppercase; color: #999; margin-bottom: 16px; display: flex; align-items: center; gap: 20px; }
-    .section-label::before { content: ''; width: 40px; height: 1px; background: #ccc; }
-    .section-title { font-family: 'Raleway', sans-serif; font-size: clamp(30px, 4vw, 50px); margin-bottom: 40px; }
-    
-    .category-title { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 0.1em; margin: 60px 0 20px; color: var(--gold); border-bottom: 1px solid var(--gray); padding-bottom: 10px; }
+    .ticker { background: #000; padding: 14px 0; overflow: hidden; }
+    .ticker-inner { display: flex; gap: 80px; animation: ticker 30s linear infinite; white-space: nowrap; color: rgba(255,255,255,0.6); }
+    .ticker-item { display: flex; align-items: center; gap: 20px; font-size: 11px; letter-spacing: 0.1em; }
+    .ticker-date { color: var(--gold); font-size: 10px; }
+    @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-    .works-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; margin-bottom: 40px; }
-    .work-item { position: relative; background: #000; aspect-ratio: 16/9; overflow: hidden; }
-    .work-item iframe { width: 100%; height: 100%; border: none; }
-    .work-info { padding: 15px 0; }
-    .work-info h4 { font-size: 14px; font-weight: 500; margin-bottom: 5px; }
-    .work-info span { font-size: 11px; color: #777; text-transform: uppercase; letter-spacing: 0.1em; }
+    section { padding: 120px 80px; }
+    .section-label { display: flex; align-items: center; gap: 20px; font-size: 10px; letter-spacing: 0.4em; text-transform: uppercase; color: #999; margin-bottom: 16px; }
+    .section-label::before { content: ''; display: block; width: 40px; height: 1px; background: #ccc; }
+    .section-title { font-family: 'Raleway', sans-serif; font-weight: 200; font-size: clamp(38px, 5vw, 72px); letter-spacing: 0.08em; line-height: 1.05; margin-bottom: 60px; color: var(--black); }
+    .section-title em { font-family: 'Cormorant Garamond', serif; font-style: italic; color: #555; font-size: 0.8em; display: block; }
 
-    /* Footer & Contact */
-    #contact { background: #111; color: #fff; text-align: center; padding: 120px 80px; }
-    .contact-btn { display: inline-block; border: 1px solid #fff; color: #fff; padding: 18px 60px; text-decoration: none; font-size: 11px; letter-spacing: 0.2em; transition: 0.3s; }
+    #about { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .about-text p { font-size: 15px; line-height: 2.2; color: rgba(17,17,17,0.65); margin-bottom: 20px; }
+    .about-video { position: relative; aspect-ratio: 16/9; overflow: hidden; }
+    .about-video iframe { width: 100%; height: 100%; border: none; }
+
+    /* ── WORKS ── */
+    #works { background: #eeece9; }
+
+    /* カテゴリータブ */
+    .works-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 48px;
+    }
+    .works-tab {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 10px 24px;
+      border: 1px solid rgba(0,0,0,0.2);
+      background: transparent;
+      cursor: pointer;
+      font-family: 'Raleway', sans-serif;
+      transition: background 0.3s, color 0.3s, border-color 0.3s;
+      color: #666;
+    }
+    .works-tab:hover,
+    .works-tab.active {
+      background: var(--black);
+      color: #fff;
+      border-color: var(--black);
+    }
+
+    /* ポートフォリオ CTA バナー */
+    .works-cta-banner {
+      margin-top: 60px;
+      background: var(--black);
+      padding: 48px 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+    }
+    .works-cta-banner h3 {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 200;
+      font-size: clamp(20px, 3vw, 36px);
+      letter-spacing: 0.08em;
+      color: #fff;
+    }
+    .works-cta-banner p {
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+      margin-top: 8px;
+      line-height: 1.8;
+    }
+    .works-cta-btn {
+      flex-shrink: 0;
+      display: inline-block;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      text-decoration: none;
+      padding: 16px 48px;
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      transition: background 0.3s, color 0.3s;
+    }
+    .works-cta-btn:hover { background: var(--gold); color: #111; }
+
+    /* グリッド */
+    .works-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+    .work-item {
+      position: relative;
+      aspect-ratio: 16/9;
+      overflow: hidden;
+      background: #111;
+      cursor: none;
+      display: block;
+    }
+    .work-item.hidden { display: none; }
+    .work-item iframe {
+      width: 100%; height: 100%; border: none;
+      transition: transform 0.6s ease;
+      pointer-events: none;
+    }
+    .work-item:hover iframe { transform: scale(1.04); }
+    .work-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.1) 55%);
+      opacity: 0; transition: opacity 0.4s; z-index: 2; pointer-events: none;
+    }
+    .work-item:hover .work-overlay { opacity: 1; }
+    .work-label {
+      position: absolute; bottom: 20px; left: 20px; right: 20px;
+      z-index: 3; opacity: 0; transform: translateY(8px);
+      transition: all 0.4s; pointer-events: none; color: #fff;
+    }
+    .work-item:hover .work-label { opacity: 1; transform: translateY(0); }
+    .work-label h4 { font-size: 13px; letter-spacing: 0.06em; margin-bottom: 6px; line-height: 1.4; }
+    .work-label .work-cat { font-size: 9px; color: var(--gold); letter-spacing: 0.2em; text-transform: uppercase; }
+    .work-label .work-desc { font-size: 11px; color: rgba(255,255,255,0.65); margin-top: 4px; line-height: 1.6; }
+
+    /* お問い合わせ誘導ラベル */
+    .work-label .work-cta-hint {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 10px;
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid rgba(200,169,110,0.4);
+      padding: 4px 12px;
+    }
+
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+    .service-card { background: #fff; padding: 48px 36px; position: relative; overflow: hidden; transition: background 0.3s; }
+    .service-card::before { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--black); transition: width 0.5s ease; }
+    .service-card:hover::before { width: 100%; }
+    .service-card:hover { background: #f5f3f0; }
+    .service-number { font-family: 'Raleway', sans-serif; font-weight: 200; font-size: 72px; color: rgba(0,0,0,0.05); line-height: 1; margin-bottom: -20px; }
+    .service-card h3 { font-size: 17px; font-weight: 500; margin-bottom: 14px; }
+    .service-card p { font-size: 13px; line-height: 2; color: rgba(17,17,17,0.5); }
+
+    #contact { background: #111; text-align: center; position: relative; overflow: hidden; }
+    #contact::before { content: 'CONTACT'; font-family: 'Raleway', sans-serif; font-weight: 200; font-size: clamp(80px, 15vw, 220px); position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: rgba(255,255,255,0.03); white-space: nowrap; pointer-events: none; }
+    .contact-inner { position: relative; z-index: 1; }
+    #contact p { color: rgba(255,255,255,0.5); max-width: 520px; margin: 0 auto 48px; }
+    #contact .section-title { color: #fff; }
+    .contact-btn { display: inline-block; border: 1px solid rgba(255,255,255,0.4); color: #fff; text-decoration: none; padding: 18px 64px; font-size: 11px; letter-spacing: 0.35em; text-transform: uppercase; transition: background 0.3s, color 0.3s; }
     .contact-btn:hover { background: #fff; color: #111; }
-    footer { background: #000; color: #888; padding: 60px 80px; display: flex; justify-content: space-between; font-size: 12px; }
+
+    footer { background: #000; padding: 80px 80px 40px; display: grid; grid-template-columns: 1fr auto; gap: 40px; border-top: 1px solid rgba(255,255,255,0.05); }
+    .footer-logo { font-family: 'Raleway', sans-serif; font-weight: 300; font-size: 18px; letter-spacing: 0.3em; color: var(--pure-white); margin-bottom: 24px; }
+    .footer-logo span { color: var(--gold); }
+    .footer-info { font-size: 13px; color: #888; line-height: 2.2; }
+    .footer-tel { display: block; font-size: 18px; color: var(--pure-white); text-decoration: none; margin-top: 10px; letter-spacing: 0.1em; }
+    .footer-links { display: flex; flex-direction: column; gap: 12px; list-style: none; text-align: right; }
+    .footer-links a { font-size: 11px; color: #666; text-decoration: none; letter-spacing: 0.12em; transition: color 0.3s; }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-bottom { grid-column: 1/-1; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 40px; padding-top: 24px; display: flex; justify-content: space-between; align-items: center; }
+    .footer-bottom p { font-size: 10px; color: rgba(136,136,136,0.4); }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.9s ease, transform 0.9s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
 
     @media (max-width: 1024px) {
-      section { padding: 60px 32px; }
-      .works-grid { grid-template-columns: 1fr; }
+      nav { padding: 20px 32px; background: rgba(17,17,17,0.9); }
+      .nav-links { display: none; }
+      section { padding: 80px 32px; }
+      #about { grid-template-columns: 1fr; }
+      .works-grid, .services-grid { grid-template-columns: 1fr 1fr; }
+      .works-cta-banner { flex-direction: column; text-align: center; }
+      footer { grid-template-columns: 1fr; padding: 60px 32px 32px; }
+      .footer-links { text-align: left; }
+    }
+    @media (max-width: 640px) {
+      .works-grid, .services-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -83,119 +283,351 @@
   <nav id="mainNav">
     <a href="#" class="logo">Inspire<span>Space</span>Media</a>
     <ul class="nav-links">
+      <li><a href="#about">About</a></li>
       <li><a href="#works">Works</a></li>
+      <li><a href="#services">Services</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
+    <a href="#contact" class="nav-contact">Contact</a>
   </nav>
 
   <section id="hero">
     <div class="hero-video-wrap">
-      <iframe src="https://www.youtube.com/embed/6RW7REGFUkA?autoplay=1&mute=1&loop=1&playlist=6RW7REGFUkA&controls=0" allow="autoplay; encrypted-media"></iframe>
+      <iframe
+        src="https://www.youtube.com/embed/f0zp6sX6mFY?autoplay=1&mute=1&loop=1&rel=0&playlist=f0zp6sX6mFY&controls=0"
+        allow="autoplay; encrypted-media" title="Hero video"
+      ></iframe>
     </div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
-      <h1 class="hero-title">Inspire Space Media<br><em>空から、心を動かす。</em></h1>
-      <p>ドローン撮影・映像制作。唯一無二の視点でプロジェクトを加速させる。</p>
+      <p class="hero-eyebrow">FPV Drone Cinematography</p>
+      <h1 class="hero-title">
+        InspireSpaceMedia<br>
+        <em>空から、心を動かす。</em>
+      </h1>
+      <p class="hero-sub">
+        ドローン撮影・動画制作・施設点検・農薬散布まで、<br>
+        空から切り取る唯一無二の映像で、<br>
+        あなたのプロジェクトを次のステージへ。
+      </p>
+      <a href="#works" class="hero-cta">View Our Works</a>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
     </div>
   </section>
 
+  <div class="ticker">
+    <div class="ticker-inner">
+      <div class="ticker-item"><span class="ticker-date">New</span><span>業務開局済み・全国包括申請済み ｜ ドローン撮影・点検・農薬散布 全国対応</span></div>
+      <div class="ticker-item"><span class="ticker-date">Service</span><span>FPVドローン・マイクロドローン・通常ドローン撮影 承ります</span></div>
+      <div class="ticker-item"><span class="ticker-date">YouTube</span><span>ドローン撮影・空撮映像をYouTubeで配信中</span></div>
+      <div class="ticker-item"><span class="ticker-date">Contact</span><span>お仕事のご依頼・ご質問は dreamgate.omori@gmail.com まで</span></div>
+      <div class="ticker-item"><span class="ticker-date">New</span><span>業務開局済み・全国包括申請済み ｜ ドローン撮影・点検・農薬散布 全国対応</span></div>
+      <div class="ticker-item"><span class="ticker-date">Service</span><span>FPVドローン・マイクロドローン・通常ドローン撮影 承ります</span></div>
+    </div>
+  </div>
+
+  <section id="about">
+    <div class="about-text reveal">
+      <div class="section-label">About Us</div>
+      <h2 class="section-title">DRONE<br><em>Cinema</em></h2>
+      <p>空から心を動かす映像をお届けする映像制作チーム。ドローン撮影から動画企画・編集・配信まで、映像に関わるすべてをワンストップで対応します。</p>
+      <p>FPVドローン・マイクロドローン・通常ドローンを駆使した撮影から、YouTube動画配信・映像企画制作編集まで一貫対応。業務開局済み・全国包括申請済みの安心対応です。</p>
+    </div>
+    <div class="about-video reveal">
+      <iframe src="https://www.youtube.com/embed/gvE-NXEKYqY?rel=0" allowfullscreen title="About video"></iframe>
+    </div>
+  </section>
+
+  <!-- ── WORKS ── -->
   <section id="works">
-    <div class="section-label">Portfolio</div>
-    <h2 class="section-title">OUR WORKS</h2>
-
-    <h3 class="category-title">Resort & Public Projects</h3>
-    <div class="works-grid">
-      <div class="work-item-wrap">
-        <div class="work-item"><iframe src="https://www.youtube.com/embed/6RW7REGFUkA"></iframe></div>
-        <div class="work-info"><h4>PALCALL嬬恋リゾート</h4><span>Hotel & Resort</span></div>
-      </div>
-      <div class="work-item-wrap">
-        <div class="work-item"><iframe src="https://www.youtube.com/embed/rKjBHhKw790"></iframe></div>
-        <div class="work-info"><h4>環境省 ドローン業務</h4><span>Public Sector</span></div>
-      </div>
-      <div class="work-item-wrap">
-        <div class="work-item"><iframe src="https://www.youtube.com/embed/wHEaRuOtx9U"></iframe></div>
-        <div class="work-info"><h4>玉村八幡宮</h4><span>Shrine & Heritage</span></div>
-      </div>
-      <div class="work-item-wrap">
-        <div class="work-item"><iframe src="https://www.youtube.com/embed/WwUDxQqeGgY"></iframe></div>
-        <div class="work-info"><h4>鬼押出し園</h4><span>Nature & Tourism</span></div>
-      </div>
+    <div class="reveal">
+      <div class="section-label">Works</div>
+      <h2 class="section-title">OUR<br><em>Portfolio</em></h2>
     </div>
 
-    <h3 class="category-title">Industrial & Automotive</h3>
-    <div class="works-grid">
-      <div class="work-item-wrap">
-        <div class="work-item"><iframe src="https://www.youtube.com/embed/7BJX5OK0GOo"></iframe></div>
-        <div class="work-info"><h4>株式会社 新井ハガネ</h4><span>Industrial PR</span></div>
-      </div>
-      <div class="work-item-wrap">
-        <div class="work-item"><iframe src="https://www.youtube.com/embed/f0zp6sX6mFY"></iframe></div>
-        <div class="work-info"><h4>製品・シミュレーターテスト</h4><span>Testing & Promotion</span></div>
-      </div>
-      <div class="work-item-wrap">
-        <div class="work-item"><iframe src="https://www.youtube.com/embed/pQsytYnY2sY"></iframe></div>
-        <div class="work-info"><h4>太陽自動車</h4><span>Automotive PR</span></div>
-      </div>
-      <div class="work-item-wrap">
-        <div class="work-item"><iframe src="https://www.youtube.com/embed/IY6vC4iO9Zc"></iframe></div>
-        <div class="work-info"><h4>気球撮影プロジェクト</h4><span>Aerial Special</span></div>
-      </div>
+    <!-- カテゴリータブ -->
+    <div class="works-tabs reveal">
+      <button class="works-tab active" data-filter="all">All</button>
+      <button class="works-tab" data-filter="resort">リゾート・観光</button>
+      <button class="works-tab" data-filter="facility">施設・ホテル</button>
+      <button class="works-tab" data-filter="corporate">企業PV</button>
+      <button class="works-tab" data-filter="sports">スポーツ</button>
+      <button class="works-tab" data-filter="event">イベント</button>
+      <button class="works-tab" data-filter="scenery">景色・行政</button>
     </div>
 
-    <h3 class="category-title">Sports & Events</h3>
-    <div class="works-grid">
-      <div class="work-item-wrap">
-        <div class="work-item"><iframe src="https://www.youtube.com/embed/YpF4ocHGs8I"></iframe></div>
-        <div class="work-info"><h4>ザスパ群馬ルミナス</h4><span>Women's Soccer</span></div>
+    <div class="works-grid reveal">
+
+      <!-- リゾート・観光 -->
+      <div class="work-item" data-cat="resort">
+        <iframe src="https://www.youtube.com/embed/1rJ9VioG6-0?rel=0" allowfullscreen loading="lazy"></iframe>
+        <div class="work-overlay"></div>
+        <div class="work-label">
+          <div class="work-cat">リゾート・観光</div>
+          <h4>PALCALL嬬恋リゾート</h4>
+          <p class="work-desc">スキー場・リゾート施設の空撮プロモーション映像</p>
+          <span class="work-cta-hint">→ 同様の撮影を依頼する</span>
+        </div>
       </div>
-      <div class="work-item-wrap">
-        <div class="work-item"><iframe src="https://www.youtube.com/embed/CKb3sVLni_A"></iframe></div>
-        <div class="work-info"><h4>ラグビー 元日本代表戦</h4><span>Sports Event</span></div>
+
+      <div class="work-item" data-cat="resort">
+        <iframe src="https://www.youtube.com/embed/WwUDxQqeGgY?rel=0" allowfullscreen loading="lazy"></iframe>
+        <div class="work-overlay"></div>
+        <div class="work-label">
+          <div class="work-cat">リゾート・観光</div>
+          <h4>鬼押出し園</h4>
+          <p class="work-desc">群馬県・観光スポットのドローン空撮映像</p>
+          <span class="work-cta-hint">→ 同様の撮影を依頼する</span>
+        </div>
       </div>
-      <div class="work-item-wrap">
-        <div class="work-item"><iframe src="https://www.youtube.com/embed/lXu9Iy-kKj0"></iframe></div>
-        <div class="work-info"><h4>浅間レーシング</h4><span>Motorsports</span></div>
+
+      <!-- 施設・ホテル -->
+      <div class="work-item" data-cat="facility">
+        <iframe src="https://www.youtube.com/embed/6RW7REGFUkA?rel=0" allowfullscreen loading="lazy"></iframe>
+        <div class="work-overlay"></div>
+        <div class="work-label">
+          <div class="work-cat">施設・ホテル</div>
+          <h4>ホテル撮影</h4>
+          <p class="work-desc">宿泊施設のプロモーション・インバウンド向け映像</p>
+          <span class="work-cta-hint">→ 同様の撮影を依頼する</span>
+        </div>
       </div>
-      <div class="work-item-wrap">
-        <div class="work-item"><iframe src="https://www.youtube.com/embed/EIz_40H_AFk"></iframe></div>
-        <div class="work-info"><h4>桐生花火大会</h4><span>Night Event</span></div>
+
+      <div class="work-item" data-cat="facility">
+        <iframe src="https://www.youtube.com/embed/wHEaRuOtx9U?rel=0" allowfullscreen loading="lazy"></iframe>
+        <div class="work-overlay"></div>
+        <div class="work-label">
+          <div class="work-cat">施設・ホテル</div>
+          <h4>玉村八幡宮</h4>
+          <p class="work-desc">神社・文化施設の空撮・プロモーション映像</p>
+          <span class="work-cta-hint">→ 同様の撮影を依頼する</span>
+        </div>
       </div>
+
+      <!-- 企業PV -->
+      <div class="work-item" data-cat="corporate">
+        <iframe src="https://www.youtube.com/embed/7BJX5OK0GOo?rel=0" allowfullscreen loading="lazy"></iframe>
+        <div class="work-overlay"></div>
+        <div class="work-label">
+          <div class="work-cat">企業PV</div>
+          <h4>新井ハガネ株式会社</h4>
+          <p class="work-desc">製造業・企業ブランディング映像</p>
+          <span class="work-cta-hint">→ 企業PVを依頼する</span>
+        </div>
+      </div>
+
+      <div class="work-item" data-cat="corporate">
+        <iframe src="https://www.youtube.com/embed/f0zp6sX6mFY?rel=0" allowfullscreen loading="lazy"></iframe>
+        <div class="work-overlay"></div>
+        <div class="work-label">
+          <div class="work-cat">企業PV・製品テスト</div>
+          <h4>WinmaX × CUSCO × YOKOHAMA × ZENKAIRACING</h4>
+          <p class="work-desc">製品テスト・シミュレーター映像制作</p>
+          <span class="work-cta-hint">→ 企業PVを依頼する</span>
+        </div>
+      </div>
+
+      <div class="work-item" data-cat="corporate">
+        <iframe src="https://www.youtube.com/embed/pQsytYnY2sY?rel=0" allowfullscreen loading="lazy"></iframe>
+        <div class="work-overlay"></div>
+        <div class="work-label">
+          <div class="work-cat">企業PV</div>
+          <h4>太陽自動車</h4>
+          <p class="work-desc">自動車販売・企業プロモーション映像</p>
+          <span class="work-cta-hint">→ 企業PVを依頼する</span>
+        </div>
+      </div>
+
+      <!-- スポーツ -->
+      <div class="work-item" data-cat="sports">
+        <iframe src="https://www.youtube.com/embed/YpF4ocHGs8I?rel=0" allowfullscreen loading="lazy"></iframe>
+        <div class="work-overlay"></div>
+        <div class="work-label">
+          <div class="work-cat">スポーツ</div>
+          <h4>女子サッカー ザスパ群馬ルミナス</h4>
+          <p class="work-desc">プロスポーツ・試合ハイライト映像</p>
+          <span class="work-cta-hint">→ スポーツ撮影を依頼する</span>
+        </div>
+      </div>
+
+      <div class="work-item" data-cat="sports">
+        <iframe src="https://www.youtube.com/embed/CKb3sVLni_A?rel=0" allowfullscreen loading="lazy"></iframe>
+        <div class="work-overlay"></div>
+        <div class="work-label">
+          <div class="work-cat">スポーツ</div>
+          <h4>ラグビー 元日本代表 VS 元カナダ代表</h4>
+          <p class="work-desc">国際試合・スポーツドキュメンタリー映像</p>
+          <span class="work-cta-hint">→ スポーツ撮影を依頼する</span>
+        </div>
+      </div>
+
+      <!-- イベント -->
+      <div class="work-item" data-cat="event">
+        <iframe src="https://www.youtube.com/embed/IY6vC4iO9Zc?rel=0" allowfullscreen loading="lazy"></iframe>
+        <div class="work-overlay"></div>
+        <div class="work-label">
+          <div class="work-cat">イベント</div>
+          <h4>気球撮影</h4>
+          <p class="work-desc">熱気球イベントの空撮・ドキュメント映像</p>
+          <span class="work-cta-hint">→ イベント撮影を依頼する</span>
+        </div>
+      </div>
+
+      <div class="work-item" data-cat="event">
+        <iframe src="https://www.youtube.com/embed/lXu9Iy-kKj0?rel=0" allowfullscreen loading="lazy"></iframe>
+        <div class="work-overlay"></div>
+        <div class="work-label">
+          <div class="work-cat">イベント</div>
+          <h4>浅間レーシング</h4>
+          <p class="work-desc">モータースポーツ・レースイベント映像</p>
+          <span class="work-cta-hint">→ イベント撮影を依頼する</span>
+        </div>
+      </div>
+
+      <div class="work-item" data-cat="event">
+        <iframe src="https://www.youtube.com/embed/EIz_40H_AFk?rel=0" allowfullscreen loading="lazy"></iframe>
+        <div class="work-overlay"></div>
+        <div class="work-label">
+          <div class="work-cat">イベント</div>
+          <h4>桐生花火大会</h4>
+          <p class="work-desc">花火大会・大型イベントの空撮映像</p>
+          <span class="work-cta-hint">→ イベント撮影を依頼する</span>
+        </div>
+      </div>
+
+      <!-- 景色・行政 -->
+      <div class="work-item" data-cat="scenery">
+        <iframe src="https://www.youtube.com/embed/HGRhS-HZ05E?rel=0" allowfullscreen loading="lazy"></iframe>
+        <div class="work-overlay"></div>
+        <div class="work-label">
+          <div class="work-cat">景色撮影</div>
+          <h4>景色空撮</h4>
+          <p class="work-desc">自然・風景の高品質ドローン映像</p>
+          <span class="work-cta-hint">→ 景色撮影を依頼する</span>
+        </div>
+      </div>
+
+      <div class="work-item" data-cat="scenery">
+        <iframe src="https://www.youtube.com/embed/rKjBHhKw790?rel=0" allowfullscreen loading="lazy"></iframe>
+        <div class="work-overlay"></div>
+        <div class="work-label">
+          <div class="work-cat">行政・環境</div>
+          <h4>環境省 ドローン担当</h4>
+          <p class="work-desc">官公庁・環境調査ドローン映像制作</p>
+          <span class="work-cta-hint">→ 行政・調査撮影を依頼する</span>
+        </div>
+      </div>
+
+    </div><!-- /works-grid -->
+
+    <!-- お問い合わせ誘導バナー -->
+    <div class="works-cta-banner reveal">
+      <div>
+        <h3>YOUR PROJECT,<br>次のステージへ。</h3>
+        <p>ドローン撮影・映像制作のご依頼、お気軽にご相談ください。<br>業務開局済み・全国包括申請済みで全国対応しています。</p>
+      </div>
+      <a href="#contact" class="works-cta-btn">無料相談 / Contact</a>
+    </div>
+
+  </section>
+
+  <section id="services">
+    <div class="reveal">
+      <div class="section-label">Services</div>
+      <h2 class="section-title">WHAT WE<br><em>Offer</em></h2>
+    </div>
+    <div class="services-grid reveal">
+      <div class="service-card"><div class="service-number">01</div><h3>ドローン撮影</h3><p>FPV・マイクロ・通常ドローン。全国対応。</p></div>
+      <div class="service-card"><div class="service-number">02</div><h3>動画制作</h3><p>企画から編集まで一貫対応。</p></div>
+      <div class="service-card"><div class="service-number">03</div><h3>ドローン点検</h3><p>外壁・屋根・施設点検。低コストで安全。</p></div>
     </div>
   </section>
 
   <section id="contact">
-    <h2 class="section-title">LET'S WORK TOGETHER</h2>
-    <p>ドローン撮影、映像制作のご依頼・ご相談はこちらから</p><br>
-    <a href="mailto:dreamgate.omori@gmail.com" class="contact-btn">CONTACT US</a>
+    <div class="contact-inner reveal">
+      <div class="section-label" style="justify-content:center;">Contact Us</div>
+      <h2 class="section-title">LET'S<br><em>Work Together</em></h2>
+      <p>お仕事のご依頼・ご質問はお気軽にご連絡ください。</p>
+      <a href="mailto:dreamgate.omori@gmail.com" class="contact-btn">お問い合わせ / Contact</a>
+    </div>
   </section>
 
   <footer>
     <div>
-      <strong>合同会社 Dream Gate</strong><br>
-      〒370-1301 群馬県高崎市新町3023 小菅アーバン101<br>
-      代表：大森 利勝 / TEL: 080-3491-8585
+      <div class="footer-logo">Inspire<span>Space</span>Media</div>
+      <div class="footer-info">
+        合同会社 Drem Gate<br>
+        〒370-1301 群馬県高崎市新町3023 小菅アーバン101<br>
+        <a href="tel:08034918585" class="footer-tel">TEL: 080-3491-8585</a>
+        代表社員　大森 利勝<br>
+        Email: dreamgate.omori@gmail.com
+      </div>
     </div>
-    <div>© 2026 Inspire Space Media.</div>
+    <ul class="footer-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#works">Works</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="footer-bottom">
+      <p>© 2026 合同会社 Drem Gate / InspireSpaceMedia.</p>
+    </div>
   </footer>
 
   <script>
+    // Cursor
     const cursor = document.getElementById('cursor');
-    const ring = document.getElementById('cursorRing');
+    const ring   = document.getElementById('cursorRing');
     let rx = 0, ry = 0;
     document.addEventListener('mousemove', e => {
       cursor.style.left = e.clientX + 'px';
-      cursor.style.top = e.clientY + 'px';
+      cursor.style.top  = e.clientY + 'px';
     });
     function updateRing() {
-      rx += (parseFloat(cursor.style.left || 0) - rx) * 0.12;
-      ry += (parseFloat(cursor.style.top || 0) - ry) * 0.12;
-      ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+      const cx = parseFloat(cursor.style.left || 0);
+      const cy = parseFloat(cursor.style.top || 0);
+      rx += (cx - rx) * 0.12;
+      ry += (cy - ry) * 0.12;
+      ring.style.left = rx + 'px';
+      ring.style.top  = ry + 'px';
       requestAnimationFrame(updateRing);
     }
     updateRing();
+
+    // Nav scroll
+    const nav = document.getElementById('mainNav');
     window.addEventListener('scroll', () => {
-      document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 100);
+      nav.classList.toggle('scrolled', window.scrollY > 100);
+    });
+
+    // Reveal
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+      });
+    }, { threshold: 0.1 });
+    revealEls.forEach(el => observer.observe(el));
+
+    // Works カテゴリーフィルター
+    const tabs = document.querySelectorAll('.works-tab');
+    const items = document.querySelectorAll('.work-item');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        const filter = tab.dataset.filter;
+        items.forEach(item => {
+          if (filter === 'all' || item.dataset.cat === filter) {
+            item.classList.remove('hidden');
+          } else {
+            item.classList.add('hidden');
+          }
+        });
+      });
     });
   </script>
 </body>
