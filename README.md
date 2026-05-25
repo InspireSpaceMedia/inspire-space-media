@@ -1,0 +1,580 @@
+[index.html](https://github.com/user-attachments/files/28217056/index.html)
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>InspireSpaceMedia – 空から、心を動かす。</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Raleway:wght@200;300;400;600&family=Noto+Sans+JP:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,300;1,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black: #111111; --white: #f8f7f4; --pure-white: #ffffff;
+      --gold: #c8a96e; --gold-dim: rgba(200,169,110,0.1);
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--white); color: var(--black); font-family: 'Noto Sans JP', sans-serif; font-weight: 300; overflow-x: hidden; cursor: none; }
+
+    .cursor { position: fixed; width: 10px; height: 10px; background: var(--gold); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); }
+    .cursor-ring { position: fixed; width: 36px; height: 36px; border: 1px solid rgba(200,169,110,0.5); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); transition: all .12s ease; }
+
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 24px 48px; background: transparent; transition: background .4s, padding .4s; }
+    nav.scrolled { background: rgba(17,17,17,.95); border-bottom: 1px solid rgba(255,255,255,.1); padding: 16px 48px; }
+    .logo { font-family: 'Raleway', sans-serif; font-weight: 300; font-size: 20px; letter-spacing: .3em; color: var(--pure-white); text-decoration: none; }
+    .logo span { color: var(--gold); }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,.7); text-decoration: none; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; transition: color .3s; }
+    .nav-links a:hover { color: var(--pure-white); }
+    .nav-contact { border: 1px solid var(--pure-white); padding: 8px 24px; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--pure-white); text-decoration: none; transition: background .3s, color .3s; }
+    .nav-contact:hover { background: var(--pure-white); color: var(--black); }
+
+    #hero { position: relative; width: 100%; height: 100vh; overflow: hidden; display: flex; align-items: flex-end; padding: 80px; color: var(--pure-white); }
+    .hero-video-wrap { position: absolute; inset: 0; z-index: 0; }
+    .hero-video-wrap iframe { position: absolute; top: 50%; left: 50%; width: 177.78vh; height: 56.25vw; min-width: 100%; min-height: 100%; transform: translate(-50%,-50%); pointer-events: none; border: none; }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.8) 0%, rgba(0,0,0,.2) 50%, rgba(0,0,0,.4) 100%); z-index: 1; }
+    .hero-content { position: relative; z-index: 2; max-width: 800px; }
+    .hero-eyebrow { font-size: 10px; letter-spacing: .4em; text-transform: uppercase; color: var(--gold); margin-bottom: 24px; opacity: 0; animation: fadeUp 1s .4s ease forwards; }
+    .hero-title { font-family: 'Raleway', sans-serif; font-weight: 200; font-size: clamp(32px,5vw,72px); line-height: 1.1; letter-spacing: .12em; margin-bottom: 16px; opacity: 0; animation: fadeUp 1s .7s ease forwards; color: var(--pure-white); }
+    .hero-title em { font-family: 'Cormorant Garamond', serif; font-style: italic; color: rgba(255,255,255,.8); display: block; font-size: clamp(28px,4vw,56px); letter-spacing: .06em; margin-top: 12px; }
+    .hero-sub { font-size: 14px; line-height: 2; color: rgba(255,255,255,.8); max-width: 460px; margin-bottom: 40px; opacity: 0; animation: fadeUp 1s 1s ease forwards; }
+    .hero-cta { display: inline-flex; align-items: center; gap: 16px; font-size: 11px; letter-spacing: .25em; text-transform: uppercase; color: var(--pure-white); text-decoration: none; opacity: 0; animation: fadeUp 1s 1.2s ease forwards; }
+    .hero-cta::after { content: ''; display: block; width: 60px; height: 1px; background: var(--gold); transition: width .3s; }
+    .hero-cta:hover::after { width: 100px; }
+    .hero-scroll { position: absolute; bottom: 48px; right: 80px; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 12px; opacity: 0; animation: fadeIn 1.5s 1.8s ease forwards; }
+    .hero-scroll span { font-size: 9px; letter-spacing: .35em; text-transform: uppercase; color: rgba(255,255,255,.5); writing-mode: vertical-rl; }
+    .scroll-line { width: 1px; height: 60px; background: linear-gradient(to bottom, var(--gold), transparent); animation: scrollLine 2s 2s infinite ease; }
+    @keyframes scrollLine { 0%{transform:scaleY(0);transform-origin:top;opacity:1} 50%{transform:scaleY(1);transform-origin:top;opacity:1} 100%{transform:scaleY(0);transform-origin:bottom;opacity:0} }
+
+    .ticker { background: #000; padding: 14px 0; overflow: hidden; }
+    .ticker-inner { display: flex; gap: 80px; animation: ticker 30s linear infinite; white-space: nowrap; color: rgba(255,255,255,.6); }
+    .ticker-item { display: flex; align-items: center; gap: 20px; font-size: 11px; letter-spacing: .1em; }
+    .ticker-date { color: var(--gold); font-size: 10px; }
+    @keyframes ticker { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+    section { padding: 120px 80px; }
+    .section-label { display: flex; align-items: center; gap: 20px; font-size: 10px; letter-spacing: .4em; text-transform: uppercase; color: #999; margin-bottom: 16px; }
+    .section-label::before { content: ''; display: block; width: 40px; height: 1px; background: #ccc; }
+    .section-title { font-family: 'Raleway', sans-serif; font-weight: 200; font-size: clamp(38px,5vw,72px); letter-spacing: .08em; line-height: 1.05; margin-bottom: 60px; color: var(--black); }
+    .section-title em { font-family: 'Cormorant Garamond', serif; font-style: italic; color: #555; font-size: .8em; display: block; }
+
+    /* ── ABOUT ── */
+    #about { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .about-text p { font-size: 15px; line-height: 2.2; color: rgba(17,17,17,.65); margin-bottom: 20px; }
+    .about-video { position: relative; aspect-ratio: 16/9; overflow: hidden; }
+    .about-video iframe { width: 100%; height: 100%; border: none; }
+
+    /* ── CREDENTIALS ── */
+    #credentials {
+      background: var(--black);
+      padding: 72px 80px;
+      text-align: center;
+    }
+    .cred-label {
+      font-size: 10px; letter-spacing: .4em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 40px;
+      display: flex; align-items: center; justify-content: center; gap: 20px;
+    }
+    .cred-label::before, .cred-label::after { content: ''; display: block; width: 40px; height: 1px; background: var(--gold); opacity: .4; }
+    .cred-grid {
+      display: flex; flex-wrap: wrap; justify-content: center;
+      gap: 2px;
+    }
+    .cred-card {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      padding: 32px 40px;
+      flex: 1 1 220px; max-width: 320px;
+      transition: background .3s, border-color .3s;
+    }
+    .cred-card:hover { background: rgba(200,169,110,.06); border-color: rgba(200,169,110,.3); }
+    .cred-icon { font-size: 28px; margin-bottom: 16px; }
+    .cred-card h4 { font-family: 'Raleway', sans-serif; font-weight: 300; font-size: 15px; letter-spacing: .1em; color: var(--pure-white); margin-bottom: 8px; }
+    .cred-card p { font-size: 12px; color: rgba(255,255,255,.4); line-height: 1.8; letter-spacing: .05em; }
+    .cred-badge { display: inline-block; margin-top: 12px; font-size: 9px; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(200,169,110,.3); padding: 4px 14px; }
+
+    /* ── WORKS ── */
+    #works { background: #eeece9; }
+    .works-tabs { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 48px; }
+    .works-tab { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; padding: 10px 24px; border: 1px solid rgba(0,0,0,.2); background: transparent; cursor: pointer; font-family: 'Raleway', sans-serif; transition: background .3s, color .3s, border-color .3s; color: #666; }
+    .works-tab:hover, .works-tab.active { background: var(--black); color: #fff; border-color: var(--black); }
+
+    .works-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; }
+
+    /* サムネイル＋クリックで再生 */
+    .work-item { position: relative; aspect-ratio: 16/9; overflow: hidden; background: #111; cursor: pointer; }
+    .work-item.hidden { display: none; }
+    .work-thumb { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
+    .work-item:hover .work-thumb { transform: scale(1.04); }
+    .work-play {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      width: 56px; height: 56px;
+      background: rgba(255,255,255,.15); border: 1.5px solid rgba(255,255,255,.7);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      z-index: 3; transition: background .3s, transform .3s; backdrop-filter: blur(4px);
+    }
+    .work-play svg { width: 18px; height: 18px; fill: #fff; margin-left: 3px; }
+    .work-item:hover .work-play { background: rgba(200,169,110,.85); transform: translate(-50%,-50%) scale(1.12); }
+    .work-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.88) 0%, rgba(0,0,0,.05) 55%); opacity: 0; transition: opacity .4s; z-index: 2; }
+    .work-item:hover .work-overlay { opacity: 1; }
+    .work-label { position: absolute; bottom: 20px; left: 20px; right: 20px; z-index: 4; opacity: 0; transform: translateY(8px); transition: all .4s; color: #fff; }
+    .work-item:hover .work-label { opacity: 1; transform: translateY(0); }
+    .work-cat { font-size: 9px; color: var(--gold); letter-spacing: .2em; text-transform: uppercase; margin-bottom: 4px; }
+    .work-label h4 { font-size: 13px; letter-spacing: .06em; margin-bottom: 4px; line-height: 1.4; }
+    .work-desc { font-size: 11px; color: rgba(255,255,255,.65); line-height: 1.6; }
+    .work-cta-hint { display: inline-flex; align-items: center; gap: 8px; margin-top: 8px; font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(200,169,110,.4); padding: 4px 12px; }
+
+    /* モーダル */
+    .modal-bg { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.93); z-index: 9000; align-items: center; justify-content: center; }
+    .modal-bg.open { display: flex; }
+    .modal-inner { position: relative; width: 90vw; max-width: 1100px; aspect-ratio: 16/9; }
+    .modal-inner iframe { width: 100%; height: 100%; border: none; border-radius: 2px; }
+    .modal-close { position: absolute; top: -44px; right: 0; background: none; border: none; cursor: pointer; color: #fff; font-size: 32px; line-height: 1; font-family: 'Raleway', sans-serif; font-weight: 200; opacity: .7; transition: opacity .2s; }
+    .modal-close:hover { opacity: 1; }
+
+    .works-cta-banner { margin-top: 60px; background: var(--black); padding: 48px 60px; display: flex; align-items: center; justify-content: space-between; gap: 40px; }
+    .works-cta-banner h3 { font-family: 'Raleway', sans-serif; font-weight: 200; font-size: clamp(20px,3vw,36px); letter-spacing: .08em; color: #fff; }
+    .works-cta-banner p { font-size: 13px; color: rgba(255,255,255,.5); margin-top: 8px; line-height: 1.8; }
+    .works-cta-btn { flex-shrink: 0; display: inline-block; border: 1px solid var(--gold); color: var(--gold); text-decoration: none; padding: 16px 48px; font-size: 11px; letter-spacing: .3em; text-transform: uppercase; white-space: nowrap; transition: background .3s, color .3s; }
+    .works-cta-btn:hover { background: var(--gold); color: #111; }
+
+    /* ── SERVICES ── */
+    .services-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; }
+    .service-card { background: #fff; padding: 48px 36px; position: relative; overflow: hidden; transition: background .3s; }
+    .service-card::before { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--black); transition: width .5s ease; }
+    .service-card:hover::before { width: 100%; }
+    .service-card:hover { background: #f5f3f0; }
+    .service-number { font-family: 'Raleway', sans-serif; font-weight: 200; font-size: 72px; color: rgba(0,0,0,.05); line-height: 1; margin-bottom: -20px; }
+    .service-card h3 { font-size: 17px; font-weight: 500; margin-bottom: 14px; }
+    .service-card p { font-size: 13px; line-height: 2; color: rgba(17,17,17,.5); }
+
+    /* ── CONTACT ── */
+    #contact { background: #111; text-align: center; position: relative; overflow: hidden; }
+    #contact::before { content: 'CONTACT'; font-family: 'Raleway', sans-serif; font-weight: 200; font-size: clamp(80px,15vw,220px); position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); color: rgba(255,255,255,.03); white-space: nowrap; pointer-events: none; }
+    .contact-inner { position: relative; z-index: 1; }
+    #contact p { color: rgba(255,255,255,.5); max-width: 520px; margin: 0 auto 48px; }
+    #contact .section-title { color: #fff; }
+    .contact-btn { display: inline-block; border: 1px solid rgba(255,255,255,.4); color: #fff; text-decoration: none; padding: 18px 64px; font-size: 11px; letter-spacing: .35em; text-transform: uppercase; transition: background .3s, color .3s; }
+    .contact-btn:hover { background: #fff; color: #111; }
+
+    footer { background: #000; padding: 80px 80px 40px; display: grid; grid-template-columns: 1fr auto; gap: 40px; border-top: 1px solid rgba(255,255,255,.05); }
+    .footer-logo { font-family: 'Raleway', sans-serif; font-weight: 300; font-size: 18px; letter-spacing: .3em; color: var(--pure-white); margin-bottom: 24px; }
+    .footer-logo span { color: var(--gold); }
+    .footer-info { font-size: 13px; color: #888; line-height: 2.2; }
+    .footer-tel { display: block; font-size: 18px; color: var(--pure-white); text-decoration: none; margin-top: 10px; letter-spacing: .1em; }
+    .footer-links { display: flex; flex-direction: column; gap: 12px; list-style: none; text-align: right; }
+    .footer-links a { font-size: 11px; color: #666; text-decoration: none; letter-spacing: .12em; transition: color .3s; }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-bottom { grid-column: 1/-1; border-top: 1px solid rgba(255,255,255,.05); margin-top: 40px; padding-top: 24px; display: flex; justify-content: space-between; align-items: center; }
+    .footer-bottom p { font-size: 10px; color: rgba(136,136,136,.4); }
+
+    @keyframes fadeUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+    .reveal { opacity: 0; transform: translateY(40px); transition: opacity .9s ease, transform .9s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 1024px) {
+      nav { padding: 20px 32px; background: rgba(17,17,17,.9); }
+      .nav-links { display: none; }
+      section { padding: 80px 32px; }
+      #credentials { padding: 60px 32px; }
+      #about { grid-template-columns: 1fr; }
+      .works-grid, .services-grid { grid-template-columns: 1fr 1fr; }
+      .works-cta-banner { flex-direction: column; text-align: center; }
+      footer { grid-template-columns: 1fr; padding: 60px 32px 32px; }
+      .footer-links { text-align: left; }
+    }
+    @media (max-width: 640px) {
+      .works-grid, .services-grid { grid-template-columns: 1fr; }
+      .cred-card { max-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav id="mainNav">
+  <a href="#" class="logo"><img src="logo.svg" alt="InspireSpaceMedia" style="height:48px;width:auto;"></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#works">Works</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-contact">Contact</a>
+</nav>
+
+<section id="hero">
+  <div class="hero-video-wrap">
+    <iframe src="https://www.youtube.com/embed/oFXarywBw8A?autoplay=1&mute=1&loop=1&rel=0&playlist=oFXarywBw8A&controls=0" allow="autoplay; encrypted-media" title="Hero video"></iframe>
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">FPV Drone Cinematography</p>
+    <h1 class="hero-title">InspireSpaceMedia<br><em>空から、心を動かす。</em></h1>
+    <p class="hero-sub">ドローン撮影・動画制作・施設点検まで、<br>空から切り取る唯一無二の映像で、<br>あなたのプロジェクトを次のステージへ。</p>
+    <a href="#works" class="hero-cta">View Our Works</a>
+  </div>
+  <div class="hero-scroll"><div class="scroll-line"></div><span>Scroll</span></div>
+</section>
+
+<div class="ticker">
+  <div class="ticker-inner">
+    <div class="ticker-item"><span class="ticker-date">New</span><span>業務開局済み・全国包括申請済み ｜ ドローン撮影・点検 全国対応</span></div>
+    <div class="ticker-item"><span class="ticker-date">Media</span><span>TBS「マツコの知らない世界」映像提供 ｜ 日テレ「ニュースエブリィ」映像提供</span></div>
+    <div class="ticker-item"><span class="ticker-date">Gov</span><span>JNTO 日本政府観光局へ映像提供実績あり</span></div>
+    <div class="ticker-item"><span class="ticker-date">Service</span><span>FPVドローン・マイクロドローン・通常ドローン撮影 承ります</span></div>
+    <div class="ticker-item"><span class="ticker-date">New</span><span>業務開局済み・全国包括申請済み ｜ ドローン撮影・点検 全国対応</span></div>
+    <div class="ticker-item"><span class="ticker-date">Media</span><span>TBS「マツコの知らない世界」映像提供 ｜ 日テレ「ニュースエブリィ」映像提供</span></div>
+    <div class="ticker-item"><span class="ticker-date">Gov</span><span>JNTO 日本政府観光局へ映像提供実績あり</span></div>
+    <div class="ticker-item"><span class="ticker-date">Service</span><span>FPVドローン・マイクロドローン・通常ドローン撮影 承ります</span></div>
+  </div>
+</div>
+
+<section id="about">
+  <div class="about-text reveal">
+    <div class="section-label">About Us</div>
+    <h2 class="section-title">DRONE<br><em>Cinema</em></h2>
+    <p>空から心を動かす映像をお届けする映像制作チーム。ドローン撮影から動画企画・編集・配信まで、映像に関わるすべてをワンストップで対応します。</p>
+    <p>FPVドローン・マイクロドローン・通常ドローンを駆使した撮影から、YouTube動画配信・映像企画制作編集まで一貫対応。業務開局済み・全国包括申請済みの安心対応です。</p>
+  </div>
+  <div class="about-video reveal">
+    <iframe src="https://www.youtube.com/embed/gvE-NXEKYqY?rel=0" allowfullscreen title="About video"></iframe>
+  </div>
+</section>
+
+<!-- ── CREDENTIALS ── -->
+<div id="credentials" class="reveal">
+  <div class="cred-label">Media &amp; Official Credentials</div>
+  <div class="cred-grid">
+    <div class="cred-card">
+      <div class="cred-icon">📺</div>
+      <h4>マツコの知らない世界</h4>
+      <p>TBS 人気バラエティ番組へ<br>ドローン映像を提供</p>
+      <span class="cred-badge">映像提供実績</span>
+    </div>
+    <div class="cred-card">
+      <div class="cred-icon">📡</div>
+      <h4>ニュースエブリィ</h4>
+      <p>日本テレビ 報道番組へ<br>空撮映像を提供</p>
+      <span class="cred-badge">映像提供実績</span>
+    </div>
+    <div class="cred-card">
+      <div class="cred-icon">🏛️</div>
+      <h4>JNTO 日本政府観光局</h4>
+      <p>インバウンド向け観光プロモーションへ<br>映像を公式提供</p>
+      <span class="cred-badge">政府機関 公式採用</span>
+    </div>
+  </div>
+</div>
+
+<!-- ── WORKS ── -->
+<section id="works">
+  <div class="reveal">
+    <div class="section-label">Works</div>
+    <h2 class="section-title">OUR<br><em>Portfolio</em></h2>
+  </div>
+
+  <div class="works-tabs reveal">
+    <button class="works-tab active" data-filter="all">All</button>
+    <button class="works-tab" data-filter="resort">リゾート・観光</button>
+    <button class="works-tab" data-filter="facility">施設・ホテル</button>
+    <button class="works-tab" data-filter="corporate">企業PV</button>
+    <button class="works-tab" data-filter="sports">スポーツ</button>
+    <button class="works-tab" data-filter="event">イベント</button>
+    <button class="works-tab" data-filter="scenery">景色・行政</button>
+  </div>
+
+  <div class="works-grid reveal">
+
+    <div class="work-item" data-cat="resort" data-vid="1rJ9VioG6-0">
+      <img class="work-thumb" src="https://img.youtube.com/vi/1rJ9VioG6-0/mqdefault.jpg" alt="PALCALL嬬恋リゾート" loading="lazy">
+      <div class="work-overlay"></div>
+      <div class="work-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+      <div class="work-label">
+        <div class="work-cat">リゾート・観光</div>
+        <h4>PALCALL嬬恋リゾート</h4>
+        <p class="work-desc">スキー場・リゾート施設の空撮プロモーション</p>
+        <span class="work-cta-hint">→ 同様の撮影を依頼する</span>
+      </div>
+    </div>
+
+    <div class="work-item" data-cat="resort" data-vid="WwUDxQqeGgY">
+      <img class="work-thumb" src="https://img.youtube.com/vi/WwUDxQqeGgY/mqdefault.jpg" alt="鬼押出し園" loading="lazy">
+      <div class="work-overlay"></div>
+      <div class="work-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+      <div class="work-label">
+        <div class="work-cat">リゾート・観光</div>
+        <h4>鬼押出し園</h4>
+        <p class="work-desc">群馬県・観光スポットのドローン空撮</p>
+        <span class="work-cta-hint">→ 同様の撮影を依頼する</span>
+      </div>
+    </div>
+
+    <div class="work-item" data-cat="facility" data-vid="6RW7REGFUkA">
+      <img class="work-thumb" src="https://img.youtube.com/vi/6RW7REGFUkA/mqdefault.jpg" alt="ホテル撮影" loading="lazy">
+      <div class="work-overlay"></div>
+      <div class="work-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+      <div class="work-label">
+        <div class="work-cat">施設・ホテル</div>
+        <h4>ホテル撮影</h4>
+        <p class="work-desc">宿泊施設のプロモーション映像</p>
+        <span class="work-cta-hint">→ 同様の撮影を依頼する</span>
+      </div>
+    </div>
+
+    <div class="work-item" data-cat="facility" data-vid="wHEaRuOtx9U">
+      <img class="work-thumb" src="https://img.youtube.com/vi/wHEaRuOtx9U/mqdefault.jpg" alt="玉村八幡宮" loading="lazy">
+      <div class="work-overlay"></div>
+      <div class="work-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+      <div class="work-label">
+        <div class="work-cat">施設・ホテル</div>
+        <h4>玉村八幡宮</h4>
+        <p class="work-desc">神社・文化施設の空撮・プロモーション</p>
+        <span class="work-cta-hint">→ 同様の撮影を依頼する</span>
+      </div>
+    </div>
+
+    <div class="work-item" data-cat="corporate" data-vid="7BJX5OK0GOo">
+      <img class="work-thumb" src="https://img.youtube.com/vi/7BJX5OK0GOo/mqdefault.jpg" alt="新井ハガネ" loading="lazy">
+      <div class="work-overlay"></div>
+      <div class="work-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+      <div class="work-label">
+        <div class="work-cat">企業PV</div>
+        <h4>新井ハガネ</h4>
+        <p class="work-desc">製造業・企業ブランディング映像</p>
+        <span class="work-cta-hint">→ 企業PVを依頼する</span>
+      </div>
+    </div>
+
+    <div class="work-item" data-cat="corporate" data-vid="f0zp6sX6mFY">
+      <img class="work-thumb" src="https://img.youtube.com/vi/f0zp6sX6mFY/mqdefault.jpg" alt="WinmaX CUSCO" loading="lazy">
+      <div class="work-overlay"></div>
+      <div class="work-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+      <div class="work-label">
+        <div class="work-cat">企業PV・製品テスト</div>
+        <h4>WinmaX × CUSCO × YOKOHAMA × ZENKAIRACING</h4>
+        <p class="work-desc">製品テスト・シミュレーター映像制作</p>
+        <span class="work-cta-hint">→ 企業PVを依頼する</span>
+      </div>
+    </div>
+
+    <div class="work-item" data-cat="corporate" data-vid="pQsytYnY2sY">
+      <img class="work-thumb" src="https://img.youtube.com/vi/pQsytYnY2sY/mqdefault.jpg" alt="太陽自動車" loading="lazy">
+      <div class="work-overlay"></div>
+      <div class="work-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+      <div class="work-label">
+        <div class="work-cat">企業PV</div>
+        <h4>太陽自動車</h4>
+        <p class="work-desc">自動車販売・企業プロモーション映像</p>
+        <span class="work-cta-hint">→ 企業PVを依頼する</span>
+      </div>
+    </div>
+
+    <div class="work-item" data-cat="sports" data-vid="YpF4ocHGs8I">
+      <img class="work-thumb" src="https://img.youtube.com/vi/YpF4ocHGs8I/mqdefault.jpg" alt="ザスパ群馬ルミナス" loading="lazy">
+      <div class="work-overlay"></div>
+      <div class="work-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+      <div class="work-label">
+        <div class="work-cat">スポーツ</div>
+        <h4>女子サッカー ザスパ群馬ルミナス</h4>
+        <p class="work-desc">プロスポーツ・試合ハイライト映像</p>
+        <span class="work-cta-hint">→ スポーツ撮影を依頼する</span>
+      </div>
+    </div>
+
+    <div class="work-item" data-cat="sports" data-vid="CKb3sVLni_A">
+      <img class="work-thumb" src="https://img.youtube.com/vi/CKb3sVLni_A/mqdefault.jpg" alt="ラグビー" loading="lazy">
+      <div class="work-overlay"></div>
+      <div class="work-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+      <div class="work-label">
+        <div class="work-cat">スポーツ</div>
+        <h4>ラグビー 元日本代表 VS 元カナダ代表</h4>
+        <p class="work-desc">国際試合・スポーツドキュメンタリー映像</p>
+        <span class="work-cta-hint">→ スポーツ撮影を依頼する</span>
+      </div>
+    </div>
+
+    <div class="work-item" data-cat="event" data-vid="IY6vC4iO9Zc">
+      <img class="work-thumb" src="https://img.youtube.com/vi/IY6vC4iO9Zc/mqdefault.jpg" alt="気球撮影" loading="lazy">
+      <div class="work-overlay"></div>
+      <div class="work-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+      <div class="work-label">
+        <div class="work-cat">イベント</div>
+        <h4>気球撮影</h4>
+        <p class="work-desc">熱気球イベントの空撮・ドキュメント映像</p>
+        <span class="work-cta-hint">→ イベント撮影を依頼する</span>
+      </div>
+    </div>
+
+    <div class="work-item" data-cat="event" data-vid="lXu9Iy-kKj0">
+      <img class="work-thumb" src="https://img.youtube.com/vi/lXu9Iy-kKj0/mqdefault.jpg" alt="浅間レーシング" loading="lazy">
+      <div class="work-overlay"></div>
+      <div class="work-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+      <div class="work-label">
+        <div class="work-cat">イベント</div>
+        <h4>浅間レーシング</h4>
+        <p class="work-desc">モータースポーツ・レースイベント映像</p>
+        <span class="work-cta-hint">→ イベント撮影を依頼する</span>
+      </div>
+    </div>
+
+    <div class="work-item" data-cat="event" data-vid="EIz_40H_AFk">
+      <img class="work-thumb" src="https://img.youtube.com/vi/EIz_40H_AFk/mqdefault.jpg" alt="桐生花火大会" loading="lazy">
+      <div class="work-overlay"></div>
+      <div class="work-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+      <div class="work-label">
+        <div class="work-cat">イベント</div>
+        <h4>桐生花火大会</h4>
+        <p class="work-desc">花火大会・大型イベントの空撮映像</p>
+        <span class="work-cta-hint">→ イベント撮影を依頼する</span>
+      </div>
+    </div>
+
+    <div class="work-item" data-cat="scenery" data-vid="HGRhS-HZ05E">
+      <img class="work-thumb" src="https://img.youtube.com/vi/HGRhS-HZ05E/mqdefault.jpg" alt="景色空撮" loading="lazy">
+      <div class="work-overlay"></div>
+      <div class="work-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+      <div class="work-label">
+        <div class="work-cat">景色撮影</div>
+        <h4>景色空撮</h4>
+        <p class="work-desc">自然・風景の高品質ドローン映像</p>
+        <span class="work-cta-hint">→ 景色撮影を依頼する</span>
+      </div>
+    </div>
+
+    <div class="work-item" data-cat="scenery" data-vid="rKjBHhKw790">
+      <img class="work-thumb" src="https://img.youtube.com/vi/rKjBHhKw790/mqdefault.jpg" alt="環境省" loading="lazy">
+      <div class="work-overlay"></div>
+      <div class="work-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+      <div class="work-label">
+        <div class="work-cat">行政・環境</div>
+        <h4>環境省 ドローン担当</h4>
+        <p class="work-desc">官公庁・環境調査ドローン映像制作</p>
+        <span class="work-cta-hint">→ 行政・調査撮影を依頼する</span>
+      </div>
+    </div>
+
+  </div><!-- /works-grid -->
+
+  <div class="works-cta-banner reveal">
+    <div>
+      <h3>YOUR PROJECT,<br>次のステージへ。</h3>
+      <p>ドローン撮影・映像制作のご依頼、お気軽にご相談ください。<br>業務開局済み・全国包括申請済みで全国対応しています。</p>
+    </div>
+    <a href="#contact" class="works-cta-btn">無料相談 / Contact</a>
+  </div>
+</section>
+
+<!-- モーダル -->
+<div class="modal-bg" id="modalBg">
+  <div class="modal-inner">
+    <button class="modal-close" id="modalClose">✕ Close</button>
+    <iframe id="modalIframe" src="" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+  </div>
+</div>
+
+<section id="services">
+  <div class="reveal">
+    <div class="section-label">Services</div>
+    <h2 class="section-title">WHAT WE<br><em>Offer</em></h2>
+  </div>
+  <div class="services-grid reveal">
+    <div class="service-card"><div class="service-number">01</div><h3>ドローン撮影</h3><p>FPV・マイクロ・通常ドローン。全国対応。</p></div>
+    <div class="service-card"><div class="service-number">02</div><h3>動画制作</h3><p>企画から編集まで一貫対応。</p></div>
+    <div class="service-card"><div class="service-number">03</div><h3>ドローン点検</h3><p>外壁・屋根・施設点検。低コストで安全。</p></div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact-inner reveal">
+    <div class="section-label" style="justify-content:center;">Contact Us</div>
+    <h2 class="section-title">LET'S<br><em>Work Together</em></h2>
+    <p>お仕事のご依頼・ご質問はお気軽にご連絡ください。</p>
+    <a href="mailto:dreamgate.omori@gmail.com" class="contact-btn">お問い合わせ / Contact</a>
+  </div>
+</section>
+
+<footer>
+  <div>
+    <div class="footer-logo"><img src="logo.svg" alt="InspireSpaceMedia" style="height:40px;width:auto;filter:brightness(1);"></div>
+    <div class="footer-info">
+      合同会社 Drem Gate<br>
+      〒370-1301 群馬県高崎市新町3023 小菅アーバン101<br>
+      <a href="tel:08034918585" class="footer-tel">TEL: 080-3491-8585</a>
+      代表社員　大森 利勝<br>
+      Email: dreamgate.omori@gmail.com
+    </div>
+  </div>
+  <ul class="footer-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#works">Works</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="footer-bottom">
+    <p>© 2026 合同会社 Drem Gate / InspireSpaceMedia.</p>
+  </div>
+</footer>
+
+<script>
+  // Cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+  });
+  (function updateRing() {
+    rx += (parseFloat(cursor.style.left||0) - rx) * 0.12;
+    ry += (parseFloat(cursor.style.top||0) - ry) * 0.12;
+    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+    requestAnimationFrame(updateRing);
+  })();
+
+  // Nav
+  const nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 100));
+
+  // Reveal
+  const obs = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);} }), {threshold:.1});
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // Works filter
+  document.querySelectorAll('.works-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.works-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const f = tab.dataset.filter;
+      document.querySelectorAll('.work-item').forEach(item => {
+        item.classList.toggle('hidden', f !== 'all' && item.dataset.cat !== f);
+      });
+    });
+  });
+
+  // Modal
+  const modalBg = document.getElementById('modalBg');
+  const modalIframe = document.getElementById('modalIframe');
+  document.querySelectorAll('.work-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const vid = item.dataset.vid;
+      modalIframe.src = `https://www.youtube.com/embed/${vid}?autoplay=1&rel=0`;
+      modalBg.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+  function closeModal() {
+    modalBg.classList.remove('open');
+    modalIframe.src = '';
+    document.body.style.overflow = '';
+  }
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+  modalBg.addEventListener('click', e => { if(e.target === modalBg) closeModal(); });
+  document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
+</script>
+</body>
+</html>
