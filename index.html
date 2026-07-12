@@ -3,7 +3,53 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>InspireSpaceMedia – 空から、心を動かす。</title>
+  <title>InspireSpaceMedia｜群馬・全国対応のドローン空撮/動画制作会社 - 空から、心を動かす。</title>
+  <meta name="description" content="群馬県高崎市を拠点にドローン空撮・動画制作・施設点検を全国対応で承るInspireSpaceMedia(運営：合同会社Dream Gate)。TBS「マツコの知らない世界」、日本テレビ「ニュースエブリィ」、日本政府観光局(JNTO)への映像提供実績あり。FPV・マイクロドローンによる撮影から企画編集まで一貫対応。" />
+  <meta name="keywords" content="ドローン撮影,空撮,動画制作,FPVドローン,ドローン点検,群馬,高崎,全国対応" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://inspire-space-media.vercel.app/" />
+  <link rel="icon" href="/logo.svg" type="image/svg+xml" />
+
+  <!-- OGP / SNSシェア用 -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="ja_JP" />
+  <meta property="og:site_name" content="InspireSpaceMedia" />
+  <meta property="og:title" content="InspireSpaceMedia｜空から、心を動かす。ドローン空撮/動画制作" />
+  <meta property="og:description" content="群馬・全国対応のドローン空撮/動画制作/施設点検。TBS・日テレ・JNTOへの映像提供実績。" />
+  <meta property="og:url" content="https://inspire-space-media.vercel.app/" />
+  <meta property="og:image" content="https://inspire-space-media.vercel.app/ogp.jpg" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="InspireSpaceMedia｜空から、心を動かす。" />
+  <meta name="twitter:description" content="群馬・全国対応のドローン空撮/動画制作/施設点検。TBS・日テレ・JNTOへの映像提供実績。" />
+  <meta name="twitter:image" content="https://inspire-space-media.vercel.app/ogp.jpg" />
+
+  <!-- 構造化データ(LocalBusiness) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "InspireSpaceMedia",
+    "alternateName": "合同会社Dream Gate",
+    "image": "https://inspire-space-media.vercel.app/logo.svg",
+    "url": "https://inspire-space-media.vercel.app/",
+    "telephone": "+81-80-3491-8585",
+    "email": "dreamgate.omori@gmail.com",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "新町3023 小菅アーバン101",
+      "addressLocality": "高崎市",
+      "addressRegion": "群馬県",
+      "postalCode": "370-1301",
+      "addressCountry": "JP"
+    },
+    "areaServed": "JP",
+    "description": "ドローン空撮・動画制作・施設点検を全国対応で行う映像制作会社。TBS・日本テレビ・日本政府観光局(JNTO)への映像提供実績あり。",
+    "priceRange": "要相談"
+  }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Raleway:wght@200;300;400;600&family=Noto+Sans+JP:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,300;1,300&display=swap" rel="stylesheet" />
@@ -93,6 +139,53 @@
     .cred-card p { font-size: 12px; color: rgba(255,255,255,.4); line-height: 1.8; letter-spacing: .05em; }
     .cred-badge { display: inline-block; margin-top: 12px; font-size: 9px; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(200,169,110,.3); padding: 4px 14px; }
 
+    /* ── QUALIFICATIONS ── */
+    #qualifications {
+      background: var(--pure-white);
+      padding: 72px 80px;
+      text-align: center;
+      border-bottom: 1px solid rgba(0,0,0,.06);
+    }
+    .qual-label {
+      font-size: 10px; letter-spacing: .4em; text-transform: uppercase;
+      color: #999; margin-bottom: 40px;
+      display: flex; align-items: center; justify-content: center; gap: 20px;
+    }
+    .qual-label::before, .qual-label::after { content: ''; display: block; width: 40px; height: 1px; background: #ccc; }
+    .qual-grid {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 14px;
+      max-width: 900px; margin: 0 auto;
+    }
+    .qual-badge {
+      display: inline-flex; align-items: center; gap: 10px;
+      border: 1px solid rgba(0,0,0,.15); padding: 14px 22px;
+      font-size: 13px; letter-spacing: .04em; color: var(--black);
+      background: transparent; transition: border-color .3s, background .3s;
+    }
+    .qual-badge:hover { border-color: var(--gold); background: var(--gold-dim); }
+    .qual-badge .qual-icon { font-size: 16px; color: var(--gold); flex-shrink: 0; }
+    .qual-note { margin-top: 32px; font-size: 12px; color: rgba(17,17,17,.4); letter-spacing: .03em; }
+
+    /* ── FOLLOW / REELS ── */
+    #follow { background: #eeece9; text-align: center; }
+    .follow-links { display: flex; justify-content: center; gap: 16px; margin-bottom: 56px; flex-wrap: wrap; }
+    .follow-links a {
+      display: inline-flex; align-items: center; gap: 10px;
+      border: 1px solid rgba(0,0,0,.15); padding: 12px 26px;
+      font-size: 12px; letter-spacing: .08em; color: var(--black); text-decoration: none;
+      transition: border-color .3s, background .3s;
+    }
+    .follow-links a:hover { border-color: var(--gold); background: var(--gold-dim); }
+    .follow-links svg { width: 16px; height: 16px; fill: currentColor; }
+    .reels-grid { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; max-width: 960px; margin: 0 auto; }
+    .reel-embed { width: 100%; max-width: 340px; flex: 1 1 300px; }
+    .reel-embed blockquote { margin: 0 auto !important; }
+    .reel-placeholder {
+      width: 100%; max-width: 300px; aspect-ratio: 9/16; flex: 1 1 260px;
+      border: 1px dashed rgba(0,0,0,.2); display: flex; align-items: center; justify-content: center;
+      color: rgba(0,0,0,.35); font-size: 12px; letter-spacing: .05em; text-align: center; padding: 24px;
+    }
+
     /* ── WORKS ── */
     #works { background: #eeece9; }
     .works-tabs { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 48px; }
@@ -154,8 +247,38 @@
     .contact-inner { position: relative; z-index: 1; }
     #contact p { color: rgba(255,255,255,.5); max-width: 520px; margin: 0 auto 48px; }
     #contact .section-title { color: #fff; }
-    .contact-btn { display: inline-block; border: 1px solid rgba(255,255,255,.4); color: #fff; text-decoration: none; padding: 18px 64px; font-size: 11px; letter-spacing: .35em; text-transform: uppercase; transition: background .3s, color .3s; }
+    .contact-btn { display: inline-block; border: 1px solid rgba(255,255,255,.4); color: #fff; text-decoration: none; padding: 18px 64px; font-size: 11px; letter-spacing: .35em; text-transform: uppercase; transition: background .3s, color .3s; cursor: pointer; background: transparent; font-family: 'Noto Sans JP', sans-serif; }
     .contact-btn:hover { background: #fff; color: #111; }
+
+    /* ── CONTACT FORM ── */
+    .contact-form { position: relative; z-index: 1; max-width: 560px; margin: 0 auto; text-align: left; display: flex; flex-direction: column; gap: 20px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .form-field { display: flex; flex-direction: column; gap: 8px; }
+    .form-field.full { grid-column: 1 / -1; }
+    .form-field label { font-size: 10px; letter-spacing: .15em; text-transform: uppercase; color: rgba(255,255,255,.5); }
+    .form-field label .req { color: var(--gold); margin-left: 4px; }
+    .form-field input, .form-field select, .form-field textarea {
+      background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.18);
+      color: #fff; padding: 14px 16px; font-size: 14px; font-family: 'Noto Sans JP', sans-serif;
+      transition: border-color .3s, background .3s; width: 100%;
+    }
+    .form-field input:focus, .form-field select:focus, .form-field textarea:focus {
+      outline: none; border-color: var(--gold); background: rgba(255,255,255,.07);
+    }
+    .form-field textarea { resize: vertical; min-height: 120px; }
+    .form-field select { appearance: none; cursor: pointer; }
+    .form-field select option { background: #111; color: #fff; }
+    .form-submit-row { display: flex; flex-direction: column; align-items: center; gap: 16px; margin-top: 8px; }
+    .form-note { font-size: 11px; color: rgba(255,255,255,.4); text-align: center; line-height: 1.8; }
+    .form-status { font-size: 12px; letter-spacing: .05em; min-height: 18px; }
+    .form-status.ok { color: #8fd19e; }
+    .form-status.err { color: #e08a8a; }
+    .contact-alt { margin-top: 32px; font-size: 12px; color: rgba(255,255,255,.4); text-align: center; }
+    .contact-alt a { color: var(--gold); text-decoration: none; }
+    .contact-alt a:hover { text-decoration: underline; }
+    @media (max-width: 640px) {
+      .form-row { grid-template-columns: 1fr; }
+    }
 
     footer { background: #000; padding: 80px 80px 40px; display: grid; grid-template-columns: 1fr auto; gap: 40px; border-top: 1px solid rgba(255,255,255,.05); }
     .footer-logo { font-family: 'Raleway', sans-serif; font-weight: 300; font-size: 18px; letter-spacing: .3em; color: var(--pure-white); margin-bottom: 24px; }
@@ -165,6 +288,14 @@
     .footer-links { display: flex; flex-direction: column; gap: 12px; list-style: none; text-align: right; }
     .footer-links a { font-size: 11px; color: #666; text-decoration: none; letter-spacing: .12em; transition: color .3s; }
     .footer-links a:hover { color: var(--gold); }
+    .footer-social { display: flex; gap: 14px; margin-top: 20px; }
+    .footer-social a {
+      display: flex; align-items: center; justify-content: center;
+      width: 36px; height: 36px; border: 1px solid rgba(255,255,255,.15);
+      border-radius: 50%; color: #999; transition: border-color .3s, color .3s, background .3s;
+    }
+    .footer-social a:hover { border-color: var(--gold); color: var(--gold); background: rgba(200,169,110,.08); }
+    .footer-social svg { width: 16px; height: 16px; fill: currentColor; }
     .footer-bottom { grid-column: 1/-1; border-top: 1px solid rgba(255,255,255,.05); margin-top: 40px; padding-top: 24px; display: flex; justify-content: space-between; align-items: center; }
     .footer-bottom p { font-size: 10px; color: rgba(136,136,136,.4); }
 
@@ -178,6 +309,7 @@
       .nav-links { display: none; }
       section { padding: 80px 32px; }
       #credentials { padding: 60px 32px; }
+      #qualifications { padding: 60px 32px; }
       #about { grid-template-columns: 1fr; }
       .works-grid, .services-grid { grid-template-columns: 1fr 1fr; }
       .works-cta-banner { flex-direction: column; text-align: center; }
@@ -268,6 +400,21 @@
       <span class="cred-badge">政府機関 公式採用</span>
     </div>
   </div>
+</div>
+
+<!-- ── QUALIFICATIONS ── -->
+<div id="qualifications" class="reveal">
+  <div class="qual-label">資格・許可 / Qualifications</div>
+  <div class="qual-grid">
+    <div class="qual-badge"><span class="qual-icon">🛡️</span>一等無人航空機操縦士</div>
+    <div class="qual-badge"><span class="qual-icon">🎓</span>JMA 日本マルチコプター協会 ドローンインストラクター</div>
+    <div class="qual-badge"><span class="qual-icon">📻</span>業務開局済み</div>
+    <div class="qual-badge"><span class="qual-icon">🗾</span>全国包括申請済み</div>
+    <div class="qual-badge"><span class="qual-icon">📡</span>アマチュア無線免許</div>
+    <div class="qual-badge"><span class="qual-icon">📶</span>第三級陸上特殊無線技士</div>
+    <div class="qual-badge"><span class="qual-icon">🤝</span>JUTM会員</div>
+  </div>
+  <p class="qual-note">国家資格・各種許認可を保有し、法令を遵守した安全な飛行体制で全国対応しております。</p>
 </div>
 
 <!-- ── WORKS ── -->
@@ -476,6 +623,43 @@
   </div>
 </div>
 
+<!-- ── FOLLOW / REELS ── -->
+<section id="follow">
+  <div class="reveal">
+    <div class="section-label" style="justify-content:center;">Follow Us</div>
+    <h2 class="section-title">LATEST<br><em>Reels</em></h2>
+  </div>
+
+  <div class="follow-links reveal">
+    <a href="https://www.instagram.com/inspire.space.media/" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.07 1.2.06 2.2.28 3 .58a6 6 0 0 1 2.2 1.4 6 6 0 0 1 1.4 2.2c.3.8.52 1.8.58 3 .06 1.3.07 1.7.07 4.9s0 3.6-.07 4.9c-.06 1.2-.28 2.2-.58 3a6 6 0 0 1-1.4 2.2 6 6 0 0 1-2.2 1.4c-.8.3-1.8.52-3 .58-1.3.06-1.7.07-4.9.07s-3.6 0-4.9-.07c-1.2-.06-2.2-.28-3-.58a6 6 0 0 1-2.2-1.4 6 6 0 0 1-1.4-2.2c-.3-.8-.52-1.8-.58-3C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.9c.06-1.2.28-2.2.58-3a6 6 0 0 1 1.4-2.2 6 6 0 0 1 2.2-1.4c.8-.3 1.8-.52 3-.58C8.4 2.2 8.8 2.2 12 2.2zm0 3.05a6.75 6.75 0 1 0 0 13.5 6.75 6.75 0 0 0 0-13.5zm0 11.13a4.38 4.38 0 1 1 0-8.76 4.38 4.38 0 0 1 0 8.76zm6.9-11.4a1.58 1.58 0 1 1-3.15 0 1.58 1.58 0 0 1 3.15 0z"/></svg>
+      Instagram
+    </a>
+    <a href="https://www.tiktok.com/@inspirespacemedia" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M16.6 2h-3.2v13.6a2.9 2.9 0 1 1-2.9-2.9c.28 0 .55.03.8.1V9.6a6.1 6.1 0 1 0 5.3 6.05V8.9a7.6 7.6 0 0 0 4.4 1.4V7.1a4.4 4.4 0 0 1-4.4-4.4V2z"/></svg>
+      TikTok
+    </a>
+  </div>
+
+  <div class="reels-grid reveal">
+    <div class="reel-embed">
+      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DHcqCUTzq2A/" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:340px; min-width:270px; padding:0; width:99%;">
+      </blockquote>
+    </div>
+    <div class="reel-embed">
+      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DZ7a0wBTOCK/" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:340px; min-width:270px; padding:0; width:99%;">
+      </blockquote>
+    </div>
+    <div class="reel-embed">
+      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DTeqOcGkRSm/" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:340px; min-width:270px; padding:0; width:99%;">
+      </blockquote>
+    </div>
+    <div class="reel-placeholder">TikTok動画URLをいただき次第、こちらに追加します</div>
+    <div class="reel-placeholder">YouTube ShortsのURLをいただき次第、こちらに追加します</div>
+  </div>
+</section>
+<script async src="//www.instagram.com/embed.js"></script>
+
 <section id="services">
   <div class="reveal">
     <div class="section-label">Services</div>
@@ -493,7 +677,52 @@
     <div class="section-label" style="justify-content:center;">Contact Us</div>
     <h2 class="section-title">LET'S<br><em>Work Together</em></h2>
     <p>お仕事のご依頼・ご質問はお気軽にご連絡ください。</p>
-    <a href="mailto:dreamgate.omori@gmail.com" class="contact-btn">お問い合わせ / Contact</a>
+
+    <form class="contact-form" id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+      <div class="form-row">
+        <div class="form-field">
+          <label for="cf-name">お名前<span class="req">*</span></label>
+          <input type="text" id="cf-name" name="name" required autocomplete="name">
+        </div>
+        <div class="form-field">
+          <label for="cf-company">会社名・団体名</label>
+          <input type="text" id="cf-company" name="company" autocomplete="organization">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label for="cf-email">メールアドレス<span class="req">*</span></label>
+          <input type="email" id="cf-email" name="email" required autocomplete="email">
+        </div>
+        <div class="form-field">
+          <label for="cf-tel">電話番号</label>
+          <input type="tel" id="cf-tel" name="tel" autocomplete="tel">
+        </div>
+      </div>
+      <div class="form-field full">
+        <label for="cf-service">ご依頼内容<span class="req">*</span></label>
+        <select id="cf-service" name="service" required>
+          <option value="" disabled selected>選択してください</option>
+          <option value="ドローン撮影">ドローン撮影</option>
+          <option value="動画制作">動画制作</option>
+          <option value="ドローン点検">ドローン点検</option>
+          <option value="その他・相談">その他・相談</option>
+        </select>
+      </div>
+      <div class="form-field full">
+        <label for="cf-message">ご相談内容<span class="req">*</span></label>
+        <textarea id="cf-message" name="message" required placeholder="撮影場所、ご希望日、予算感などをご記入いただくとスムーズです。"></textarea>
+      </div>
+      <div class="form-submit-row">
+        <button type="submit" class="contact-btn" id="cfSubmitBtn">送信する / Send</button>
+        <p class="form-status" id="cfStatus"></p>
+        <p class="form-note">送信内容は上記メールアドレス宛に届きます。通常2営業日以内にご返信いたします。</p>
+      </div>
+    </form>
+
+    <div class="contact-alt">お急ぎの場合はお電話、またはメールでも直接ご連絡いただけます。<br>
+      <a href="tel:08034918585">TEL: 080-3491-8585</a> ／ <a href="mailto:dreamgate.omori@gmail.com">dreamgate.omori@gmail.com</a>
+    </div>
   </div>
 </section>
 
@@ -501,11 +730,19 @@
   <div>
     <div class="footer-logo"><img src="logo.svg" alt="InspireSpaceMedia" style="height:40px;width:auto;filter:brightness(1);"></div>
     <div class="footer-info">
-      合同会社 Drem Gate<br>
+      合同会社 Dream Gate<br>
       〒370-1301 群馬県高崎市新町3023 小菅アーバン101<br>
       <a href="tel:08034918585" class="footer-tel">TEL: 080-3491-8585</a>
       代表社員　大森 利勝<br>
       Email: dreamgate.omori@gmail.com
+    </div>
+    <div class="footer-social">
+      <a href="https://www.instagram.com/inspire.space.media/" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.07 1.2.06 2.2.28 3 .58a6 6 0 0 1 2.2 1.4 6 6 0 0 1 1.4 2.2c.3.8.52 1.8.58 3 .06 1.3.07 1.7.07 4.9s0 3.6-.07 4.9c-.06 1.2-.28 2.2-.58 3a6 6 0 0 1-1.4 2.2 6 6 0 0 1-2.2 1.4c-.8.3-1.8.52-3 .58-1.3.06-1.7.07-4.9.07s-3.6 0-4.9-.07c-1.2-.06-2.2-.28-3-.58a6 6 0 0 1-2.2-1.4 6 6 0 0 1-1.4-2.2c-.3-.8-.52-1.8-.58-3C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.9c.06-1.2.28-2.2.58-3a6 6 0 0 1 1.4-2.2 6 6 0 0 1 2.2-1.4c.8-.3 1.8-.52 3-.58C8.4 2.2 8.8 2.2 12 2.2zm0 3.05a6.75 6.75 0 1 0 0 13.5 6.75 6.75 0 0 0 0-13.5zm0 11.13a4.38 4.38 0 1 1 0-8.76 4.38 4.38 0 0 1 0 8.76zm6.9-11.4a1.58 1.58 0 1 1-3.15 0 1.58 1.58 0 0 1 3.15 0z"/></svg>
+      </a>
+      <a href="https://www.tiktok.com/@inspirespacemedia" target="_blank" rel="noopener" aria-label="TikTok">
+        <svg viewBox="0 0 24 24"><path d="M16.6 2h-3.2v13.6a2.9 2.9 0 1 1-2.9-2.9c.28 0 .55.03.8.1V9.6a6.1 6.1 0 1 0 5.3 6.05V8.9a7.6 7.6 0 0 0 4.4 1.4V7.1a4.4 4.4 0 0 1-4.4-4.4V2z"/></svg>
+      </a>
     </div>
   </div>
   <ul class="footer-links">
@@ -515,7 +752,7 @@
     <li><a href="#contact">Contact</a></li>
   </ul>
   <div class="footer-bottom">
-    <p>© 2026 合同会社 Drem Gate / InspireSpaceMedia.</p>
+    <p>© 2026 合同会社 Dream Gate / InspireSpaceMedia.</p>
   </div>
 </footer>
 
@@ -574,6 +811,50 @@
   document.getElementById('modalClose').addEventListener('click', closeModal);
   modalBg.addEventListener('click', e => { if(e.target === modalBg) closeModal(); });
   document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
+
+  // Contact form
+  const contactForm = document.getElementById('contactForm');
+  const cfStatus = document.getElementById('cfStatus');
+  const cfSubmitBtn = document.getElementById('cfSubmitBtn');
+  contactForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    cfStatus.textContent = '';
+    cfStatus.className = 'form-status';
+    cfSubmitBtn.disabled = true;
+    cfSubmitBtn.textContent = '送信中...';
+
+    const data = new FormData(contactForm);
+    try {
+      const res = await fetch(contactForm.action, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        cfStatus.textContent = 'お問い合わせを受け付けました。ありがとうございます。';
+        cfStatus.classList.add('ok');
+        contactForm.reset();
+      } else {
+        throw new Error('送信に失敗しました');
+      }
+    } catch (err) {
+      // フォールバック: メールクライアントを開く
+      const name = data.get('name') || '';
+      const company = data.get('company') || '';
+      const email = data.get('email') || '';
+      const tel = data.get('tel') || '';
+      const service = data.get('service') || '';
+      const message = data.get('message') || '';
+      const body = `お名前: ${name}\n会社名: ${company}\nメール: ${email}\n電話: ${tel}\nご依頼内容: ${service}\n\n${message}`;
+      const mailto = `mailto:dreamgate.omori@gmail.com?subject=${encodeURIComponent('お問い合わせ（' + service + '）')}&body=${encodeURIComponent(body)}`;
+      window.location.href = mailto;
+      cfStatus.textContent = '自動送信に失敗したため、メールソフトを起動しました。内容をご確認の上、送信してください。';
+      cfStatus.classList.add('err');
+    } finally {
+      cfSubmitBtn.disabled = false;
+      cfSubmitBtn.textContent = '送信する / Send';
+    }
+  });
 </script>
 </body>
 </html>
