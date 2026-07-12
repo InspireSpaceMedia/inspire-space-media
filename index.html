@@ -186,6 +186,19 @@
       color: rgba(0,0,0,.35); font-size: 12px; letter-spacing: .05em; text-align: center; padding: 24px;
     }
 
+    /* ── CLIENTS ── */
+    #clients { background: var(--pure-white); padding: 100px 80px; text-align: center; border-bottom: 1px solid rgba(0,0,0,.06); }
+    .clients-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: rgba(0,0,0,.08); max-width: 900px; margin: 48px auto 0; border: 1px solid rgba(0,0,0,.08); }
+    .client-card { background: #fff; padding: 32px 28px; text-align: left; display: flex; flex-direction: column; gap: 8px; }
+    .client-card .client-name { font-size: 15px; font-weight: 500; letter-spacing: .04em; color: var(--black); }
+    .client-card .client-desc { font-size: 12px; color: #888; line-height: 1.8; }
+    .client-card .client-link { font-size: 11px; letter-spacing: .1em; color: var(--gold); text-decoration: none; margin-top: 6px; display: inline-flex; align-items: center; gap: 4px; }
+    .client-card .client-link:hover { text-decoration: underline; }
+    @media (max-width: 640px) {
+      .clients-grid { grid-template-columns: 1fr; }
+      #clients { padding: 60px 32px; }
+    }
+
     /* ── WORKS ── */
     #works { background: #eeece9; }
     .works-tabs { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 48px; }
@@ -396,7 +409,7 @@
     <div class="cred-card">
       <div class="cred-icon">🏛️</div>
       <h4>JNTO 日本政府観光局</h4>
-      <p>インバウンド向け観光プロモーションへ<br>映像を公式提供</p>
+      <p>鬼押出し園の空撮映像を<br>インバウンド向け観光プロモーションへ提供</p>
       <span class="cred-badge">政府機関 公式採用</span>
     </div>
   </div>
@@ -416,6 +429,38 @@
   </div>
   <p class="qual-note">国家資格・各種許認可を保有し、法令を遵守した安全な飛行体制で全国対応しております。</p>
 </div>
+
+<!-- ── CLIENTS ── -->
+<section id="clients">
+  <div class="reveal">
+    <div class="section-label" style="justify-content:center;">Clients</div>
+    <h2 class="section-title">導入企業<br><em>・取引実績</em></h2>
+  </div>
+  <div class="clients-grid reveal">
+    <div class="client-card">
+      <div class="client-name">JR東日本</div>
+      <div class="client-desc">外壁赤外線点検業務における空撮対応実績</div>
+    </div>
+    <div class="client-card">
+      <div class="client-name">西武プリンスホテルズ&amp;リゾーツ</div>
+      <div class="client-desc">鬼押出し園の空撮映像を提供</div>
+    </div>
+    <div class="client-card">
+      <div class="client-name">JNTO 日本政府観光局</div>
+      <div class="client-desc">鬼押出し園の空撮映像をインバウンド向け観光プロモーションに提供</div>
+    </div>
+    <div class="client-card">
+      <div class="client-name">横尾材木店</div>
+      <div class="client-desc">YouTubeチャンネル運営・新作動画制作を継続担当</div>
+      <a class="client-link" href="https://www.youtube.com/channel/UCJw4JEQQdGuOO-QpZvt03pw" target="_blank" rel="noopener">チャンネルを見る ▸</a>
+    </div>
+    <div class="client-card">
+      <div class="client-name">ザスパ群馬ルミナス</div>
+      <div class="client-desc">試合映像の撮影・提供からチャンネルの編集管理まで継続担当</div>
+      <a class="client-link" href="https://www.youtube.com/@ザスパ群馬ルミナス" target="_blank" rel="noopener">チャンネルを見る ▸</a>
+    </div>
+  </div>
+</section>
 
 <!-- ── WORKS ── -->
 <section id="works">
@@ -604,6 +649,90 @@
       </div>
     </div>
 
+    <div class="work-item" data-cat="corporate" data-vid="HsDkBJ6cw24">
+      <img class="work-thumb" src="https://img.youtube.com/vi/HsDkBJ6cw24/mqdefault.jpg" alt="企業プロモーション" loading="lazy">
+      <div class="work-overlay"></div>
+      <div class="work-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+      <div class="work-label">
+        <div class="work-cat">企業PV</div>
+        <h4>企業プロモーション</h4>
+        <p class="work-desc">空撮による企業紹介・PR映像制作</p>
+        <span class="work-cta-hint">→ 企業PVを依頼する</span>
+      </div>
+    </div>
+
+    <div class="work-item" data-cat="resort" data-vid="QkXQBToJDUI">
+      <img class="work-thumb" src="https://img.youtube.com/vi/QkXQBToJDUI/mqdefault.jpg" alt="スキー場コース撮影" loading="lazy">
+      <div class="work-overlay"></div>
+      <div class="work-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+      <div class="work-label">
+        <div class="work-cat">リゾート・観光</div>
+        <h4>スキー場コース撮影</h4>
+        <p class="work-desc">ゲレンデ・コース全体を俯瞰した空撮プロモーション</p>
+        <span class="work-cta-hint">→ 同様の撮影を依頼する</span>
+      </div>
+    </div>
+
+    <div class="work-item" data-cat="event" data-vid="P5Zw4Xcs5N4">
+      <img class="work-thumb" src="https://img.youtube.com/vi/P5Zw4Xcs5N4/mqdefault.jpg" alt="レーシングカート" loading="lazy">
+      <div class="work-overlay"></div>
+      <div class="work-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+      <div class="work-label">
+        <div class="work-cat">イベント</div>
+        <h4>レーシングカート</h4>
+        <p class="work-desc">モータースポーツ施設の空撮映像</p>
+        <span class="work-cta-hint">→ イベント撮影を依頼する</span>
+      </div>
+    </div>
+
+    <div class="work-item" data-cat="event" data-vid="byKc8LCIRvY">
+      <img class="work-thumb" src="https://img.youtube.com/vi/byKc8LCIRvY/mqdefault.jpg" alt="ドリフト走行" loading="lazy">
+      <div class="work-overlay"></div>
+      <div class="work-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+      <div class="work-label">
+        <div class="work-cat">イベント</div>
+        <h4>ドリフト走行</h4>
+        <p class="work-desc">モータースポーツ・ドリフトイベントの空撮映像</p>
+        <span class="work-cta-hint">→ イベント撮影を依頼する</span>
+      </div>
+    </div>
+
+    <div class="work-item" data-cat="event" data-vid="9gqvRJjtnS0">
+      <img class="work-thumb" src="https://img.youtube.com/vi/9gqvRJjtnS0/mqdefault.jpg" alt="レースイベント" loading="lazy">
+      <div class="work-overlay"></div>
+      <div class="work-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+      <div class="work-label">
+        <div class="work-cat">イベント</div>
+        <h4>レースイベント</h4>
+        <p class="work-desc">モータースポーツ・レース大会の空撮映像</p>
+        <span class="work-cta-hint">→ イベント撮影を依頼する</span>
+      </div>
+    </div>
+
+    <div class="work-item" data-cat="event" data-vid="KM_L3ikVNts">
+      <img class="work-thumb" src="https://img.youtube.com/vi/KM_L3ikVNts/mqdefault.jpg" alt="花火イベント" loading="lazy">
+      <div class="work-overlay"></div>
+      <div class="work-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+      <div class="work-label">
+        <div class="work-cat">イベント</div>
+        <h4>花火イベント</h4>
+        <p class="work-desc">花火大会・夜間イベントの空撮映像</p>
+        <span class="work-cta-hint">→ イベント撮影を依頼する</span>
+      </div>
+    </div>
+
+    <div class="work-item" data-cat="scenery" data-vid="QVb7_JSXlSY">
+      <img class="work-thumb" src="https://img.youtube.com/vi/QVb7_JSXlSY/mqdefault.jpg" alt="自然風景空撮" loading="lazy">
+      <div class="work-overlay"></div>
+      <div class="work-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+      <div class="work-label">
+        <div class="work-cat">景色撮影</div>
+        <h4>自然風景空撮</h4>
+        <p class="work-desc">四季折々の自然・風景を捉えた空撮映像</p>
+        <span class="work-cta-hint">→ 景色撮影を依頼する</span>
+      </div>
+    </div>
+
   </div><!-- /works-grid -->
 
   <div class="works-cta-banner reveal">
@@ -654,11 +783,19 @@
       <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DTeqOcGkRSm/" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:340px; min-width:270px; padding:0; width:99%;">
       </blockquote>
     </div>
-    <div class="reel-placeholder">TikTok動画URLをいただき次第、こちらに追加します</div>
-    <div class="reel-placeholder">YouTube ShortsのURLをいただき次第、こちらに追加します</div>
+    <div class="reel-embed">
+      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DWD82qhEWBi/" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:340px; min-width:270px; padding:0; width:99%;">
+      </blockquote>
+    </div>
+    <div class="reel-embed">
+      <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@inspirespacemedia/video/7659504435848170760" data-video-id="7659504435848170760" style="max-width: 340px;min-width: 270px;">
+        <section></section>
+      </blockquote>
+    </div>
   </div>
 </section>
 <script async src="//www.instagram.com/embed.js"></script>
+<script async src="https://www.tiktok.com/embed.js"></script>
 
 <section id="services">
   <div class="reveal">
