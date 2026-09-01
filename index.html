@@ -181,11 +181,6 @@
     .reels-grid { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; max-width: 960px; margin: 0 auto; }
     .reel-embed { width: 100%; max-width: 340px; flex: 1 1 300px; }
     .reel-embed blockquote { margin: 0 auto !important; }
-    .reel-placeholder {
-      width: 100%; max-width: 300px; aspect-ratio: 9/16; flex: 1 1 260px;
-      border: 1px dashed rgba(0,0,0,.2); display: flex; align-items: center; justify-content: center;
-      color: rgba(0,0,0,.35); font-size: 12px; letter-spacing: .05em; text-align: center; padding: 24px;
-    }
 
     /* ── CLIENTS ── */
     #clients { background: var(--pure-white); padding: 100px 80px; text-align: center; border-bottom: 1px solid rgba(0,0,0,.06); }
@@ -472,17 +467,56 @@
 
   <div class="works-tabs reveal">
     <button class="works-tab active" data-filter="all">All</button>
+    <button class="works-tab" data-filter="drift">DRIFT</button>
+    <button class="works-tab" data-filter="restaurant">飲食店</button>
     <button class="works-tab" data-filter="resort">リゾート・観光</button>
     <button class="works-tab" data-filter="facility">施設・ホテル</button>
     <button class="works-tab" data-filter="corporate">企業PV</button>
     <button class="works-tab" data-filter="sports">スポーツ</button>
     <button class="works-tab" data-filter="event">イベント</button>
     <button class="works-tab" data-filter="scenery">景色・行政</button>
-    <button class="works-tab" data-filter="drift">ドリフト</button>
-    <button class="works-tab" data-filter="restaurant">飲食店</button>
   </div>
 
   <div class="works-grid reveal">
+
+    <!-- DRIFT追加 1 -->
+    <div class="work-item" data-cat="drift" data-vid="B5T0ujBVn38">
+      <img class="work-thumb" src="https://img.youtube.com/vi/B5T0ujBVn38/mqdefault.jpg" alt="DRIFT撮影" loading="lazy">
+      <div class="work-overlay"></div>
+      <div class="work-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+      <div class="work-label">
+        <div class="work-cat">DRIFT</div>
+        <h4>TCN DRIFT Performance Challenge</h4>
+        <p class="work-desc">FPVドローンで迫る臨場感あふれるドリフト映像</p>
+        <span class="work-cta-hint">→ 同様の撮影を依頼する</span>
+      </div>
+    </div>
+
+    <!-- DRIFT追加 2 -->
+    <div class="work-item" data-cat="drift" data-vid="byKc8LCIRvY">
+      <img class="work-thumb" src="https://img.youtube.com/vi/byKc8LCIRvY/mqdefault.jpg" alt="【FPVドローン】DRIFT つくるまサーキット" loading="lazy">
+      <div class="work-overlay"></div>
+      <div class="work-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+      <div class="work-label">
+        <div class="work-cat">DRIFT</div>
+        <h4>【FPVドローン】DRIFT つくるまサーキット</h4>
+        <p class="work-desc">つくるまサーキットでの迫力のドリフト映像</p>
+        <span class="work-cta-hint">→ 同様の撮影を依頼する</span>
+      </div>
+    </div>
+
+    <!-- 飲食店追加 -->
+    <div class="work-item" data-cat="restaurant" data-vid="GhK8Nx_kops">
+      <img class="work-thumb" src="https://img.youtube.com/vi/GhK8Nx_kops/mqdefault.jpg" alt="焼肉店 牛ときどき豚" loading="lazy">
+      <div class="work-overlay"></div>
+      <div class="work-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+      <div class="work-label">
+        <div class="work-cat">飲食店</div>
+        <h4>焼肉店「牛ときどき豚」</h4>
+        <p class="work-desc">FPVドローンによる店内プロモーション映像</p>
+        <span class="work-cta-hint">→ 同様の撮影を依頼する</span>
+      </div>
+    </div>
 
     <div class="work-item" data-cat="resort" data-vid="1rJ9VioG6-0">
       <img class="work-thumb" src="https://img.youtube.com/vi/1rJ9VioG6-0/mqdefault.jpg" alt="PALCALL嬬恋リゾート" loading="lazy">
@@ -688,18 +722,6 @@
       </div>
     </div>
 
-    <div class="work-item" data-cat="event" data-vid="byKc8LCIRvY">
-      <img class="work-thumb" src="https://img.youtube.com/vi/byKc8LCIRvY/mqdefault.jpg" alt="ドリフト走行" loading="lazy">
-      <div class="work-overlay"></div>
-      <div class="work-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
-      <div class="work-label">
-        <div class="work-cat">イベント</div>
-        <h4>ドリフト走行</h4>
-        <p class="work-desc">モータースポーツ・ドリフトイベントの空撮映像</p>
-        <span class="work-cta-hint">→ イベント撮影を依頼する</span>
-      </div>
-    </div>
-
     <div class="work-item" data-cat="event" data-vid="9gqvRJjtnS0">
       <img class="work-thumb" src="https://img.youtube.com/vi/9gqvRJjtnS0/mqdefault.jpg" alt="レースイベント" loading="lazy">
       <div class="work-overlay"></div>
@@ -733,30 +755,6 @@
         <h4>自然風景空撮</h4>
         <p class="work-desc">四季折々の自然・風景を捉えた空撮映像</p>
         <span class="work-cta-hint">→ 景色撮影を依頼する</span>
-      </div>
-    </div>
-
-    <div class="work-item" data-cat="drift" data-vid="B5T0ujBVn38">
-      <img class="work-thumb" src="https://img.youtube.com/vi/B5T0ujBVn38/mqdefault.jpg" alt="ドリフト撮影" loading="lazy">
-      <div class="work-overlay"></div>
-      <div class="work-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
-      <div class="work-label">
-        <div class="work-cat">ドリフト</div>
-        <h4>ドリフト撮影</h4>
-        <p class="work-desc">ドリフト走行のドローン空撮映像</p>
-        <span class="work-cta-hint">→ 同様の撮影を依頼する</span>
-      </div>
-    </div>
-
-    <div class="work-item" data-cat="restaurant" data-vid="GhK8Nx_kops">
-      <img class="work-thumb" src="https://img.youtube.com/vi/GhK8Nx_kops/mqdefault.jpg" alt="飲食店プロモーション" loading="lazy">
-      <div class="work-overlay"></div>
-      <div class="work-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
-      <div class="work-label">
-        <div class="work-cat">飲食店</div>
-        <h4>飲食店プロモーション</h4>
-        <p class="work-desc">飲食店のプロモーション映像</p>
-        <span class="work-cta-hint">→ 同様の撮影を依頼する</span>
       </div>
     </div>
 
@@ -897,7 +895,7 @@
       合同会社 Dream Gate<br>
       〒370-1301 群馬県高崎市新町3023 小菅アーバン101<br>
       <a href="tel:08034918585" class="footer-tel">TEL: 080-3491-8585</a>
-      代表社員　大森 利勝<br>
+      代表社員 大森 利勝<br>
       Email: dreamgate.omori@gmail.com
     </div>
     <div class="footer-social">
